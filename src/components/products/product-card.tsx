@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import Image from 'next/image';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -29,7 +30,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           <p className="text-sm text-muted-foreground">{product.category}</p>
           <h3 className="mt-1 text-lg font-headline font-semibold truncate">{product.name}</h3>
           <div className="mt-4 flex items-center justify-between">
-            <p className="text-xl font-bold text-foreground">${product.price.toFixed(2)}</p>
+            <p className="text-xl font-bold text-foreground">₦{product.price.toFixed(2)}</p>
             <Button variant="ghost" size="icon" className="h-8 w-8 opacity-0 group-hover:opacity-100 transition-opacity">
                 <ArrowRight className="h-5 w-5"/>
             </Button>

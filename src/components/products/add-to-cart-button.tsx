@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -7,7 +8,8 @@ import { Label } from '@/components/ui/label';
 import { useCart } from '@/hooks/use-cart';
 import type { Product } from '@/lib/types';
 import { useToast } from '@/hooks/use-toast';
-import { ShoppingBag } from 'lucide-react';
+import { ShoppingBag, Check } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 interface AddToCartButtonProps {
   product: Product;
@@ -46,8 +48,8 @@ export default function AddToCartButton({ product }: AddToCartButtonProps) {
               <RadioGroupItem value={size} id={`size-${size}`} className="sr-only" />
               <Label
                 htmlFor={`size-${size}`}
-                className={`flex items-center justify-center rounded-md border-2 p-3 px-4 text-sm font-medium uppercase hover:bg-accent cursor-pointer ${
-                  selectedSize === size ? 'border-primary bg-primary/10' : ''
+                className={`flex items-center justify-center rounded-md border-2 p-3 px-4 text-sm font-medium uppercase hover:bg-accent cursor-pointer transition-all duration-200 ${
+                  selectedSize === size ? 'border-primary bg-primary/10 ring-2 ring-primary ring-offset-2 ring-offset-background' : 'border-border'
                 }`}
               >
                 {size}
@@ -65,11 +67,13 @@ export default function AddToCartButton({ product }: AddToCartButtonProps) {
               <RadioGroupItem value={color} id={`color-${color}`} className="sr-only" />
               <Label
                 htmlFor={`color-${color}`}
-                className={`h-8 w-8 rounded-full border-2 cursor-pointer ${
-                  selectedColor === color ? 'border-primary' : 'border-transparent'
-                }`}
-                style={{ backgroundColor: color, ringOffsetColor: 'var(--background)' }}
+                className={cn(
+                  "h-10 w-10 rounded-full border-2 cursor-pointer transition-all duration-200 flex items-center justify-center",
+                  selectedColor === color ? 'border-primary ring-2 ring-primary ring-offset-2 ring-offset-background' : 'border-border'
+                )}
+                style={{ backgroundColor: color }}
               >
+                {selectedColor === color && <Check className="h-5 w-5 text-white mix-blend-difference" />}
                 <span className="sr-only">{color}</span>
               </Label>
             </div>

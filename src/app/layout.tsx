@@ -1,3 +1,4 @@
+
 import type { Metadata } from 'next';
 import { Inter, Poppins } from 'next/font/google';
 import './globals.css';
@@ -19,18 +20,24 @@ const fontHeadline = Poppins({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://ciwaviv.com'),
   title: {
-    default: 'Ciwaviv - Energize Your Movement',
-    template: '%s | Ciwaviv',
+    default: 'Ciwaviv - Energize Your Movement | High-Performance Sportswear from Nigeria',
+    template: '%s | Ciwaviv Nigeria',
   },
-  description: 'High-performance sportswear and activewear to energize your movement. Shop the latest collections for men and women.',
+  description: 'Discover high-performance sportswear and activewear from Ciwaviv, a Nigerian brand dedicated to quality and style. Shop the latest collections for men and women and energize your movement.',
   openGraph: {
-    title: 'Ciwaviv - Energize Your Movement',
-    description: 'High-performance sportswear and activewear.',
+    title: 'Ciwaviv - Energize Your Movement | High-Performance Sportswear from Nigeria',
+    description: 'High-performance sportswear and activewear to energize your movement. Proudly Nigerian.',
     type: 'website',
-    locale: 'en_US',
+    locale: 'en_NG',
     url: 'https://ciwaviv.com',
     siteName: 'Ciwaviv',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Ciwaviv - Premium Nigerian Sportswear',
+    description: 'Engineered for movement, designed for style. Discover Ciwaviv.',
   },
 };
 

@@ -1,3 +1,4 @@
+
 import type { Product } from './types';
 
 export const products: Product[] = [
@@ -6,7 +7,7 @@ export const products: Product[] = [
     name: 'Velocity Running Shorts',
     slug: 'velocity-running-shorts',
     description: 'Lightweight and breathable, these shorts are designed for maximum speed and comfort. Features a secure zip pocket for your essentials.',
-    price: 55.00,
+    price: 25000.00,
     images: [
       { src: 'https://picsum.photos/seed/p1-1/1200/1200', alt: 'Man running in black shorts', aiHint: 'running shorts' },
       { src: 'https://picsum.photos/seed/p1-2/1200/1200', alt: 'Close up of short fabric', aiHint: 'shorts detail' },
@@ -22,7 +23,7 @@ export const products: Product[] = [
     name: 'Zenith Yoga Leggings',
     slug: 'zenith-yoga-leggings',
     description: 'Experience ultimate flexibility with our Zenith Yoga Leggings. The high-waisted design and four-way stretch fabric move with you.',
-    price: 85.00,
+    price: 38000.00,
     images: [
       { src: 'https://picsum.photos/seed/p2-1/1200/1200', alt: 'Woman in yoga pose wearing leggings', aiHint: 'yoga leggings' },
       { src: 'https://picsum.photos/seed/p2-2/1200/1200', alt: 'Fabric detail of yoga leggings', aiHint: 'leggings fabric' },
@@ -38,7 +39,7 @@ export const products: Product[] = [
     name: 'Apex Performance Tee',
     slug: 'apex-performance-tee',
     description: 'A high-performance tee that keeps you cool and dry. Its moisture-wicking technology is perfect for intense workouts.',
-    price: 45.00,
+    price: 20000.00,
     images: [
       { src: 'https://picsum.photos/seed/p3-1/1200/1200', alt: 'Man wearing a performance t-shirt', aiHint: 'performance shirt' },
       { src: 'https://picsum.photos/seed/p3-2/1200/1200', alt: 'Close up of shirt fabric', aiHint: 'shirt fabric' },
@@ -53,7 +54,7 @@ export const products: Product[] = [
     name: 'Momentum Training Jacket',
     slug: 'momentum-training-jacket',
     description: 'A versatile, weather-resistant jacket for your outdoor training sessions. Lightweight but warm, it\'s the perfect outer layer.',
-    price: 120.00,
+    price: 55000.00,
     images: [
       { src: 'https://picsum.photos/seed/p4-1/1200/1200', alt: 'Man wearing a training jacket', aiHint: 'training jacket' },
       { src: 'https://picsum.photos/seed/p4-2/1200/1200', alt: 'Jacket zipper detail', aiHint: 'jacket detail' },
@@ -68,7 +69,7 @@ export const products: Product[] = [
     name: 'Flow Seamless Bra',
     slug: 'flow-seamless-bra',
     description: 'Designed for low-impact activities like yoga and pilates, this seamless bra offers light support and maximum comfort.',
-    price: 48.00,
+    price: 22000.00,
     images: [
       { src: 'https://picsum.photos/seed/p5-1/1200/1200', alt: 'Woman wearing a seamless sports bra', aiHint: 'sports bra' },
       { src: 'https://picsum.photos/seed/p5-2/1200/1200', alt: 'Back of sports bra', aiHint: 'sports bra back' },
@@ -83,7 +84,7 @@ export const products: Product[] = [
     name: 'React Compression Tights',
     slug: 'react-compression-tights',
     description: 'Enhance your performance and recovery with our React Compression Tights, designed to support your muscles during high-intensity exercise.',
-    price: 95.00,
+    price: 42000.00,
     images: [
       { src: 'https://picsum.photos/seed/p6-1/1200/1200', alt: 'Man wearing compression tights', aiHint: 'compression tights' },
       { src: 'https://picsum.photos/seed/p6-2/1200/1200', alt: 'Detail of compression fabric', aiHint: 'tights fabric' },
@@ -98,7 +99,7 @@ export const products: Product[] = [
     name: 'Stratus Windbreaker',
     slug: 'stratus-windbreaker',
     description: 'An ultra-lightweight, packable windbreaker for women. Perfect for windy runs or as an emergency layer.',
-    price: 110.00,
+    price: 50000.00,
     images: [
       { src: 'https://picsum.photos/seed/p7-1/1200/1200', alt: 'Woman wearing a windbreaker jacket', aiHint: 'windbreaker jacket' },
       { src: 'https://picsum.photos/seed/p7-2/1200/1200', alt: 'Windbreaker packed into its pocket', aiHint: 'jacket packed' },
@@ -113,7 +114,7 @@ export const products: Product[] = [
     name: 'Endurance Sports Cap',
     slug: 'endurance-sports-cap',
     description: 'Keep the sun and sweat out of your eyes with this quick-drying, breathable sports cap. Features an adjustable strap for a perfect fit.',
-    price: 30.00,
+    price: 15000.00,
     images: [
       { src: 'https://picsum.photos/seed/p8-1/1200/1200', alt: 'A sports cap', aiHint: 'sports cap' },
       { src: 'https://picsum.photos/seed/p8-2/1200/1200', alt: 'Adjustable strap of the cap', aiHint: 'cap detail' },

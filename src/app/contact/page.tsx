@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useForm } from 'react-hook-form';
@@ -17,6 +18,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { Instagram, Twitter, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters.'),
@@ -129,8 +131,8 @@ export default function ContactPage() {
               <h3 className="text-xl font-headline font-bold mb-4">Our Office</h3>
               <p className="text-muted-foreground">
                 123 Active Way<br />
-                Motion City, 54321<br />
-                United States
+                Lagos, 100212<br />
+                Nigeria
               </p>
             </div>
           </div>

@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -15,7 +16,7 @@ export default function Footer() {
               <Logo />
             </div>
             <p className="text-muted-foreground mb-4 max-w-sm">
-              Sign up for our newsletter to get the latest news, drops, and deals.
+              Sign up for our newsletter to get the latest news, drops, and deals from our Nigerian brand.
             </p>
             <form className="flex gap-2 max-w-sm">
               <Input type="email" placeholder="Enter your email" className="flex-grow" />
@@ -30,7 +31,7 @@ export default function Footer() {
               <li><Link href="/shop" className="text-muted-foreground hover:text-primary">All Products</Link></li>
               <li><Link href="/shop?category=men" className="text-muted-foreground hover:text-primary">Men's</Link></li>
               <li><Link href="/shop?category=women" className="text-muted-foreground hover:text-primary">Women's</Link></li>
-              <li><Link href="#" className="text-muted-foreground hover:text-primary">New Arrivals</Link></li>
+              <li><Link href="/shop?sort=newest" className="text-muted-foreground hover:text-primary">New Arrivals</Link></li>
             </ul>
           </div>
 
@@ -39,8 +40,8 @@ export default function Footer() {
             <ul className="space-y-2">
               <li><Link href="/about" className="text-muted-foreground hover:text-primary">Our Story</Link></li>
               <li><Link href="/contact" className="text-muted-foreground hover:text-primary">Contact Us</Link></li>
+              <li><Link href="/track-order" className="text-muted-foreground hover:text-primary">Track Order</Link></li>
               <li><Link href="#" className="text-muted-foreground hover:text-primary">FAQs</Link></li>
-              <li><Link href="#" className="text-muted-foreground hover:text-primary">Careers</Link></li>
             </ul>
           </div>
         </div>
@@ -48,7 +49,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t flex flex-col md:flex-row justify-between items-center">
           <p className="text-muted-foreground text-sm mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} Ciwaviv. All Rights Reserved.
+            &copy; {new Date().getFullYear()} Ciwaviv Nigeria. All Rights Reserved.
           </p>
           <div className="flex space-x-4">
             <Link href="#" className="text-muted-foreground hover:text-primary">

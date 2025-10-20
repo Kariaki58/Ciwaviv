@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import Logo from '@/components/logo';
 import ThemeToggle from '@/components/theme-toggle';
@@ -8,6 +9,7 @@ const navLinks = [
   { href: '/shop', label: 'Shop' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
+  { href: '/track-order', label: 'Track Order' },
 ];
 
 export default function Header() {

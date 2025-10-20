@@ -1,3 +1,4 @@
+
 import { getProductBySlug, products } from '@/lib/products';
 import { notFound } from 'next/navigation';
 import ProductImageCarousel from '@/components/products/product-image-carousel';
@@ -19,8 +20,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const title = `${product.name} | Ciwaviv`;
-  const description = `Shop ${product.name}. ${product.description}`;
+  const title = `${product.name} - Premium Sportswear | Ciwaviv`;
+  const description = `Shop the ${product.name} from Ciwaviv. ${product.description} Available in multiple sizes and colors. High-performance activewear made in Nigeria.`;
 
   return {
     title,
@@ -65,7 +66,7 @@ export default function ProductDetailPage({ params }: Props) {
               </div>
               <p className="text-muted-foreground">125 Reviews</p>
             </div>
-            <p className="text-3xl font-bold mb-6">${product.price.toFixed(2)}</p>
+            <p className="text-3xl font-bold mb-6">₦{product.price.toFixed(2)}</p>
             <p className="text-muted-foreground leading-relaxed mb-8">{product.description}</p>
             
             <AddToCartButton product={product} />
