@@ -1,3 +1,94 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-banner",
+      "description": "Athlete in motion for hero banner",
+      "imageUrl": "https://images.unsplash.com/photo-1695918430535-775f1030f2d9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxhdGhsZXRlJTIwbW90aW9ufGVufDB8fHx8MTc2MDk4MDM5OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "athlete motion"
+    },
+    {
+      "id": "mission-image",
+      "description": "Athlete celebrating for mission section",
+      "imageUrl": "https://images.unsplash.com/photo-1706736828642-17dec58ed7e7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8YXRobGV0ZSUyMGNlbGVicmF0aW5nfGVufDB8fHx8MTc2MDk4MDM5N3ww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "athlete celebrating"
+    },
+    {
+      "id": "about-image-1",
+      "description": "Diverse group of athletes for about page",
+      "imageUrl": "https://images.unsplash.com/photo-1583331083443-4dae17ce6af2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxkaXZlcnNlJTIwYXRobGV0ZXN8ZW58MHx8fHwxNzYwOTgwMzk4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "diverse athletes"
+    },
+    {
+      "id": "about-image-2",
+      "description": "Close-up of sportswear fabric",
+      "imageUrl": "https://images.unsplash.com/photo-1715609104589-97585b210c6e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxzcG9ydHN3ZWFyJTIwZmFicmljfGVufDB8fHx8MTc2MDk4MDM5OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "sportswear fabric"
+    },
+    {
+      "id": "about-image-3",
+      "description": "Designer sketching sportswear",
+      "imageUrl": "https://images.unsplash.com/photo-1685661242142-f2590716abd8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxkZXNpZ25lciUyMHNrZXRjaHxlbnwwfHx8fDE3NjA5ODAzOTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "designer sketch"
+    },
+    {
+      "id": "product-1-img-1",
+      "description": "Velocity Running Shorts image 1",
+      "imageUrl": "https://images.unsplash.com/photo-1759476532571-c11cf67c8881?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxydW5uaW5nJTIwc2hvcnRzfGVufDB8fHx8MTc2MDk4MDM5OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "running shorts"
+    },
+    {
+      "id": "product-1-img-2",
+      "description": "Velocity Running Shorts image 2",
+      "imageUrl": "https://images.unsplash.com/photo-1695918427235-2d6faaae356a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxzaG9ydHMlMjBkZXRhaWx8ZW58MHx8fHwxNzYwOTgwMzk4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "shorts detail"
+    },
+    {
+      "id": "product-2-img-1",
+      "description": "Zenith Yoga Leggings image 1",
+      "imageUrl": "https://images.unsplash.com/photo-1758599879039-625fda430fb7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHx5b2dhJTIwbGVnZ2luZ3N8ZW58MHx8fHwxNzYwOTgwMzk4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "yoga leggings"
+    },
+    {
+      "id": "product-2-img-2",
+      "description": "Zenith Yoga Leggings image 2",
+      "imageUrl": "https://images.unsplash.com/photo-1608224108237-1e95ed988f2c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxsZWdnaW5ncyUyMGZhYnJpY3xlbnwwfHx8fDE3NjA5ODAzOTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "leggings fabric"
+    },
+    {
+      "id": "product-3-img-1",
+      "description": "Apex Performance Tee image 1",
+      "imageUrl": "https://images.unsplash.com/photo-1759030758079-3cec7f7f8f18?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxwZXJmb3JtYW5jZSUyMHNoaXJ0fGVufDB8fHx8MTc2MDk4MDM5OHww&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "performance shirt"
+    },
+    {
+      "id": "product-4-img-1",
+      "description": "Momentum Training Jacket image 1",
+      "imageUrl": "https://images.unsplash.com/photo-1638552758613-0a9a70102bdb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx0cmFpbmluZyUyMGphY2tldHxlbnwwfHx8fDE3NjA5ODAzOTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "training jacket"
+    },
+    {
+      "id": "product-5-img-1",
+      "description": "Flow Seamless Bra image 1",
+      "imageUrl": "https://images.unsplash.com/photo-1606902965551-dce093cda6e7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzcG9ydHMlMjBicmF8ZW58MHx8fHwxNzYwOTgwMzk4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "sports bra"
+    },
+    {
+      "id": "product-6-img-1",
+      "description": "React Compression Tights image 1",
+      "imageUrl": "https://images.unsplash.com/photo-1547806605-379c96c20ffb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjb21wcmVzc2lvbiUyMHRpZ2h0c3xlbnwwfHx8fDE3NjA5ODAzOTd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "compression tights"
+    },
+    {
+      "id": "product-7-img-1",
+      "description": "Stratus Windbreaker image 1",
+      "imageUrl": "https://images.unsplash.com/photo-1611308725032-74f0a551d018?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHx3aW5kYnJlYWtlciUyMGphY2tldHxlbnwwfHx8fDE3NjA4ODUwMTl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "windbreaker jacket"
+    },
+    {
+      "id": "product-8-img-1",
+      "description": "Endurance Sports Cap image 1",
+      "imageUrl": "https://images.unsplash.com/photo-1759503406930-36aca0db542f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxzcG9ydHMlMjBjYXB8ZW58MHx8fHwxNzYwOTgwMzk4fDA&ixlib=rb-4.1.0&q=80&w=1080",
+      "imageHint": "sports cap"
+    }
+  ]
 }
