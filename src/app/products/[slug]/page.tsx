@@ -4,14 +4,14 @@ import ProductImageCarousel from '@/components/products/product-image-carousel';
 import { Button } from '@/components/ui/button';
 import { Star } from 'lucide-react';
 import RelatedProducts from '@/components/products/related-products';
-import { generateSeoMetadata } from '@/ai/flows/generate-seo-metadata';
 import AddToCartButton from '@/components/products/add-to-cart-button';
+import type { Metadata } from 'next';
 
 type Props = {
   params: { slug: string };
 };
 
-export async function generateMetadata({ params }: Props) {
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const product = getProductBySlug(params.slug);
   if (!product) {
     return {
@@ -19,18 +19,15 @@ export async function generateMetadata({ params }: Props) {
     };
   }
 
-  const seoData = await generateSeoMetadata({
-    productName: product.name,
-    productDescription: product.description,
-    keywords: product.tags.join(', '),
-  });
+  const title = `${product.name} | Ciwaviv`;
+  const description = `Shop ${product.name}. ${product.description}`;
 
   return {
-    title: seoData.title,
-    description: seoData.description,
+    title,
+    description,
     openGraph: {
-      title: seoData.title,
-      description: seoData.description,
+      title,
+      description,
       images: [
         {
           url: product.images[0].src,

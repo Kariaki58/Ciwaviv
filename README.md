@@ -41,13 +41,7 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 3.  **Set up environment variables:**
 
-    This project uses Genkit for AI-powered SEO metadata generation. You'll need to configure your Google AI credentials.
-
-    Create a `.env` file in the root of the project and add your Google AI API key:
-
-    ```env
-    GOOGLE_API_KEY="YOUR_API_KEY"
-    ```
+    If you are using Firebase services, you might need a `.env` file for your configuration.
 
 ### Running the Development Server
 
@@ -73,7 +67,6 @@ The site is now running in development mode with hot-reloading. You can start ed
 *   **State Management:** [Zustand](https://github.com/pmndrs/zustand) (for cart), React Context (for theme)
 *   **Animations:** [Framer Motion](https://www.framer.com/motion/)
 *   **Icons:** [Lucide React](https://lucide.dev/)
-*   **AI:** [Firebase Genkit](https://firebase.google.com/docs/genkit) (for SEO metadata)
 *   **Forms:** [React Hook Form](https://react-hook-form.com/) & [Zod](https://zod.dev/)
 
 ## 📄 Pages
