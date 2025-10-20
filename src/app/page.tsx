@@ -3,14 +3,17 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { products } from '@/lib/products';
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowRight, Star } from 'lucide-react';
+import { ArrowRight, ShoppingBag } from 'lucide-react';
+import ProductCard from '@/components/products/product-card';
 
 export default function Home() {
   const featuredProducts = products.slice(0, 3);
+  const bestSellers = products.slice(3, 7);
 
   return (
     <div className="flex flex-col">
-      <section className="relative h-[60vh] md:h-[80vh] w-full">
+      {/* Hero Section */}
+      <section className="relative h-[70vh] md:h-[90vh] w-full">
         <Image
           src="https://picsum.photos/seed/hero/1800/1200"
           alt="Athlete in motion"
@@ -19,13 +22,13 @@ export default function Home() {
           priority
           data-ai-hint="athlete motion"
         />
-        <div className="absolute inset-0 bg-black/50" />
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+        <div className="relative z-10 flex flex-col items-center justify-end h-full text-center text-white pb-20 px-4">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-headline font-bold tracking-tight text-primary">
-            Energize Your Movement
+            Wear The Movement
           </h1>
           <p className="mt-4 max-w-2xl text-lg md:text-xl text-neutral-200">
-            Discover high-performance activewear designed to keep up with your every move.
+            Engineered for every leap, sprint, and stretch. Our gear is built to amplify your power.
           </p>
           <Button asChild size="lg" className="mt-8 bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-lg">
             <Link href="/shop">
@@ -35,133 +38,130 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Featured Collection Section */}
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-headline font-bold text-center mb-12">
-            Featured Collections
+          <h2 className="text-3xl md:text-4xl font-headline font-bold text-center mb-4">
+            Featured Collection
           </h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            Discover our latest arrivals, combining cutting-edge tech with bold, modern designs.
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {featuredProducts.map((product) => (
-              <Card key={product.id} className="overflow-hidden group">
-                <CardHeader className="p-0">
-                  <div className="relative h-96 w-full">
-                    <Image
-                      src={product.images[0].src}
-                      alt={product.name}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      data-ai-hint={product.images[0].aiHint}
-                    />
-                  </div>
-                </CardHeader>
-                <CardContent className="p-6">
-                  <CardTitle className="font-headline text-2xl mb-2">{product.name}</CardTitle>
-                  <p className="text-muted-foreground mb-4">{product.category}</p>
-                  <div className="flex justify-between items-center">
-                    <p className="text-xl font-bold">${product.price.toFixed(2)}</p>
-                    <Button asChild variant="outline">
-                      <Link href={`/products/${product.slug}`}>View Product</Link>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+       {/* Best Sellers Section */}
+      <section className="py-16 md:py-24 bg-secondary">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-headline font-bold text-center mb-4">
+            Our Best Sellers
+          </h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            Trusted by athletes. Loved by all. These are the styles that are flying off the shelves.
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {bestSellers.map((product) => (
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
           <div className="text-center mt-12">
-            <Button asChild size="lg" variant="ghost">
+            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
               <Link href="/shop">
-                Explore All Products <ArrowRight className="ml-2 h-5 w-5" />
+                Shop All Products <ShoppingBag className="ml-2 h-5 w-5" />
               </Link>
             </Button>
           </div>
         </div>
       </section>
 
-      <section className="py-16 md:py-24 bg-secondary">
-        <div className="container mx-auto px-4">
+      {/* Persuasive Section 1 */}
+      <section className="bg-background">
+        <div className="container mx-auto px-4 py-16 md:py-24">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-headline font-bold mb-4">
-                Our Mission: Unstoppable Performance
-              </h2>
-              <p className="text-lg text-muted-foreground mb-6">
-                At Ciwaviv, we're dedicated to creating innovative sportswear that fuels your passion and pushes your limits. We believe that the right gear can unlock your full potential, providing the comfort, durability, and style you need to conquer any challenge.
-              </p>
-              <ul className="space-y-4">
-                <li className="flex items-start">
-                  <CheckIcon className="text-primary mr-3 mt-1" />
-                  <span><strong>Cutting-Edge Fabrics:</strong> Breathable, moisture-wicking materials for peak comfort.</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckIcon className="text-primary mr-3 mt-1" />
-                  <span><strong>Ergonomic Design:</strong> Engineered for a full range of motion without restriction.</span>
-                </li>
-                <li className="flex items-start">
-                  <CheckIcon className="text-primary mr-3 mt-1" />
-                  <span><strong>Sustainable Practices:</strong> Committed to a healthier planet for future generations of athletes.</span>
-                </li>
-              </ul>
+            <div className="relative h-[500px] w-full rounded-lg overflow-hidden shadow-lg">
+              <Image
+                src="https://picsum.photos/seed/style1/800/1000"
+                alt="Man wearing Ciwaviv sportswear"
+                fill
+                className="object-cover"
+                data-ai-hint="male athlete"
+              />
             </div>
-            <div className="relative h-96 w-full rounded-lg overflow-hidden shadow-xl">
-               <Image
-                  src="https://picsum.photos/seed/mission/800/600"
-                  alt="Athlete celebrating"
-                  fill
-                  className="object-cover"
-                  data-ai-hint="athlete celebrating"
-               />
+            <div className="text-center md:text-left">
+              <p className="font-headline text-primary font-semibold">BUILT FOR PERFORMANCE</p>
+              <h2 className="text-3xl md:text-4xl font-headline font-bold mt-2 mb-6">
+                Unleash Your Potential
+              </h2>
+              <p className="text-lg text-muted-foreground mb-8">
+                Every piece in our collection is crafted with precision, using advanced materials that offer superior breathability, flexibility, and durability. Stop settling for less. Elevate your performance and conquer your goals with Ciwaviv.
+              </p>
+              <Button asChild size="lg" variant="outline">
+                <Link href="/shop?category=men">Shop Men's</Link>
+              </Button>
             </div>
           </div>
         </div>
       </section>
 
+      {/* Persuasive Section 2 */}
+      <section className="bg-card">
+        <div className="container mx-auto px-4 py-16 md:py-24">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div className="text-center md:text-left md:order-2">
+              <p className="font-headline text-primary font-semibold">DESIGNED FOR STYLE</p>
+              <h2 className="text-3xl md:text-4xl font-headline font-bold mt-2 mb-6">
+                Look as Good as You Feel
+              </h2>
+              <p className="text-lg text-muted-foreground mb-8">
+                We believe high-performance gear should never compromise on style. Our modern, energetic aesthetic ensures you look sharp, whether you're hitting a new personal best or navigating your day.
+              </p>
+              <Button asChild size="lg" variant="outline">
+                <Link href="/shop?category=women">Shop Women's</Link>
+              </Button>
+            </div>
+            <div className="relative h-[500px] w-full rounded-lg overflow-hidden shadow-lg md:order-1">
+              <Image
+                src="https://picsum.photos/seed/style2/800/1000"
+                alt="Woman wearing Ciwaviv sportswear"
+                fill
+                className="object-cover"
+                data-ai-hint="female athlete"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Ciwaviv Styles Section */}
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-headline font-bold text-center mb-12">
-            What Our Athletes Say
+          <h2 className="text-3xl md:text-4xl font-headline font-bold text-center mb-4">
+            #CIWAVIVSTYLES
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              { name: 'Alex R.', quote: "The most comfortable and durable gear I've ever owned. Ciwaviv is a game-changer!" },
-              { name: 'Jessie M.', quote: "From the gym to the streets, the style and performance are unmatched. I feel unstoppable." },
-              { name: 'Sam K.', quote: "I love the brand's commitment to sustainability without compromising on quality. Highly recommend!" },
-            ].map((testimonial) => (
-              <Card key={testimonial.name}>
-                <CardContent className="p-6">
-                  <div className="flex mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-5 w-5 text-primary fill-primary" />
-                    ))}
-                  </div>
-                  <p className="text-muted-foreground mb-4">"{testimonial.quote}"</p>
-                  <p className="font-bold text-right">- {testimonial.name}</p>
-                </CardContent>
-              </Card>
-            ))}
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            See how our community moves. Tag us on social media for a chance to be featured.
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="relative h-96 rounded-lg overflow-hidden shadow-lg group">
+              <Image src="https://picsum.photos/seed/gallery1/800/1200" alt="Athlete posing" fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="athlete posing"/>
+            </div>
+            <div className="relative h-96 rounded-lg overflow-hidden shadow-lg group">
+              <Image src="https://picsum.photos/seed/gallery2/800/1200" alt="Athlete stretching" fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="athlete stretching"/>
+            </div>
+            <div className="relative h-96 rounded-lg overflow-hidden shadow-lg group">
+              <Image src="https://picsum.photos/seed/gallery3/800/1200" alt="Athlete in urban environment" fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="urban athlete"/>
+            </div>
+            <div className="relative h-96 rounded-lg overflow-hidden shadow-lg group">
+              <Image src="https://picsum.photos/seed/gallery4/800/1200" alt="Athlete in nature" fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="nature athlete"/>
+            </div>
           </div>
         </div>
       </section>
     </div>
-  );
-}
-
-function CheckIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className="h-6 w-6 shrink-0"
-    >
-      <path d="M20 6 9 17l-5-5" />
-    </svg>
   );
 }
