@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { Minus, Plus, Trash2, ShoppingBag } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
+import { formatPrice } from '@/lib/utils';
 
 export default function CartPage() {
   const { items, removeItem, updateItemQuantity, total, itemCount } = useCart();
@@ -56,7 +57,7 @@ export default function CartPage() {
                         <p className="text-sm text-muted-foreground">
                           {item.size} / {item.color}
                         </p>
-                        <p className="text-lg font-semibold mt-2 sm:hidden">₦{item.price.toFixed(2)}</p>
+                        <p className="text-lg font-semibold mt-2 sm:hidden">{formatPrice(item.price)}</p>
                         <div className="flex items-center mt-2">
                           <p className="text-sm text-muted-foreground mr-2">Qty:</p>
                           <div className="flex items-center border rounded-md">
@@ -81,7 +82,7 @@ export default function CartPage() {
                         </div>
                       </div>
                       <div className="hidden sm:flex flex-col items-end ml-4">
-                        <p className="text-lg font-semibold">₦{(item.price * item.quantity).toFixed(2)}</p>
+                        <p className="text-lg font-semibold">{formatPrice(item.price * item.quantity)}</p>
                         <Button
                           variant="ghost"
                           size="icon"
@@ -108,7 +109,7 @@ export default function CartPage() {
                 <div className="space-y-4">
                   <div className="flex justify-between">
                     <span>Subtotal</span>
-                    <span>₦{total.toFixed(2)}</span>
+                    <span>{formatPrice(total)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span>Shipping</span>
@@ -117,7 +118,7 @@ export default function CartPage() {
                   <Separator />
                   <div className="flex justify-between font-bold text-xl">
                     <span>Total</span>
-                    <span>₦{total.toFixed(2)}</span>
+                    <span>{formatPrice(total)}</span>
                   </div>
                 </div>
                 <Button asChild size="lg" className="w-full mt-6 bg-primary text-primary-foreground hover:bg-primary/90">

@@ -22,6 +22,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import type { Metadata } from 'next';
+import { formatPrice } from '@/lib/utils';
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -130,7 +131,7 @@ export default function CheckoutPage() {
                     </div>
                   </div>
                   <Button type="submit" size="lg" className="w-full bg-primary text-primary-foreground hover:bg-primary/90">
-                    Pay ₦{total.toFixed(2)}
+                    Pay {formatPrice(total)}
                   </Button>
                 </form>
               </Form>
@@ -158,7 +159,7 @@ export default function CheckoutPage() {
                         <p className="text-sm text-muted-foreground">{item.size} / {item.color}</p>
                       </div>
                     </div>
-                    <p className="font-medium">₦{(item.price * item.quantity).toFixed(2)}</p>
+                    <p className="font-medium">{formatPrice(item.price * item.quantity)}</p>
                   </li>
                 ))}
               </ul>
@@ -166,7 +167,7 @@ export default function CheckoutPage() {
               <div className="space-y-2">
                 <div className="flex justify-between">
                   <span>Subtotal</span>
-                  <span>₦{total.toFixed(2)}</span>
+                  <span>{formatPrice(total)}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Shipping</span>
@@ -175,7 +176,7 @@ export default function CheckoutPage() {
                 <Separator />
                 <div className="flex justify-between font-bold text-xl">
                   <span>Total</span>
-                  <span>₦{total.toFixed(2)}</span>
+                  <span>{formatPrice(total)}</span>
                 </div>
               </div>
             </CardContent>

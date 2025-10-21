@@ -7,6 +7,7 @@ import { Star } from 'lucide-react';
 import RelatedProducts from '@/components/products/related-products';
 import AddToCartButton from '@/components/products/add-to-cart-button';
 import type { Metadata } from 'next';
+import { formatPrice } from '@/lib/utils';
 
 type Props = {
   params: { slug: string };
@@ -66,7 +67,7 @@ export default function ProductDetailPage({ params }: Props) {
               </div>
               <p className="text-muted-foreground">125 Reviews</p>
             </div>
-            <p className="text-3xl font-bold mb-6">₦{product.price.toFixed(2)}</p>
+            <p className="text-3xl font-bold mb-6">{formatPrice(product.price)}</p>
             <p className="text-muted-foreground leading-relaxed mb-8">{product.description}</p>
             
             <AddToCartButton product={product} />
