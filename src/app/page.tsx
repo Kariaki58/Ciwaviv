@@ -14,14 +14,28 @@ export default function Home() {
     <div className="flex flex-col">
       {/* Hero Section */}
       <section className="relative h-[70vh] md:h-[90vh] w-full">
-        <Image
-          src="https://picsum.photos/seed/hero/1800/1200"
-          alt="Athlete in motion"
-          fill
-          className="object-cover"
-          priority
-          data-ai-hint="athlete motion"
-        />
+        <div className="hidden md:block">
+          <Image
+            src="/civaviv.png"
+            alt="Athlete in motion"
+            fill
+            className="object-cover"
+            priority
+            data-ai-hint="athlete motion desktop"
+          />
+        </div>
+        {/* mobile banner */}
+        <div className="block md:hidden">
+          <Image
+            src="/ciwaviv_2.png"
+            alt="Athlete in motion"
+            fill
+            className="object-cover"
+            priority
+            data-ai-hint="athlete motion mobile"
+          />
+        </div>
+
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         <div className="relative z-10 flex flex-col items-center justify-end h-full text-center text-white pb-20 px-4">
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-headline font-bold tracking-tight text-primary">
@@ -85,7 +99,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative h-[500px] w-full rounded-lg overflow-hidden shadow-lg">
               <Image
-                src="https://picsum.photos/seed/style1/800/1000"
+                src="/gemini_1.png"
                 alt="Man wearing Ciwaviv sportswear"
                 fill
                 className="object-cover"
@@ -126,7 +140,7 @@ export default function Home() {
             </div>
             <div className="relative h-[500px] w-full rounded-lg overflow-hidden shadow-lg md:order-1">
               <Image
-                src="https://picsum.photos/seed/style2/800/1000"
+                src="/gemini_3.png"
                 alt="Woman wearing Ciwaviv sportswear"
                 fill
                 className="object-cover"
@@ -148,16 +162,16 @@ export default function Home() {
           </p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="relative h-96 rounded-lg overflow-hidden shadow-lg group">
-              <Image src="https://picsum.photos/seed/gallery1/800/1200" alt="Athlete posing" fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="athlete posing"/>
+              <Image src="/gemini_5.png" alt="Athlete posing" fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="athlete posing"/>
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden shadow-lg group">
-              <Image src="https://picsum.photos/seed/gallery2/800/1200" alt="Athlete stretching" fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="athlete stretching"/>
+              <Image src="/gemini_11.png" alt="Athlete stretching" fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="athlete stretching"/>
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden shadow-lg group">
-              <Image src="https://picsum.photos/seed/gallery3/800/1200" alt="Athlete in urban environment" fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="urban athlete"/>
+              <Image src="/gemini_7.png" alt="Athlete in urban environment" fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="urban athlete"/>
             </div>
             <div className="relative h-96 rounded-lg overflow-hidden shadow-lg group">
-              <Image src="https://picsum.photos/seed/gallery4/800/1200" alt="Athlete in nature" fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="nature athlete"/>
+              <Image src="/gemini_8.png" alt="Athlete in nature" fill className="object-cover transition-transform duration-300 group-hover:scale-105" data-ai-hint="nature athlete"/>
             </div>
           </div>
         </div>
