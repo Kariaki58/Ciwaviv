@@ -21,8 +21,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   }
 
-  const title = `${product.name} - Premium Sportswear | Ciwaviv`;
-  const description = `Shop the ${product.name} from Ciwaviv. ${product.description} Available in multiple sizes and colors. High-performance activewear made in Nigeria.`;
+  const title = `${product.name} - Premium Sportswear | Fithub`;
+  const description = `Shop the ${product.name} from Fithub. ${product.description} Available in multiple sizes and colors. High-performance activewear made in Nigeria.`;
 
   return {
     title,

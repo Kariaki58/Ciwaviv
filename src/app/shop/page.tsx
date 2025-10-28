@@ -4,8 +4,8 @@ import ProductGrid from '@/components/products/product-grid';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Shop All Products - Ciwaviv Nigeria',
-  description: 'Explore the full collection of Ciwaviv high-performance sportswear and activewear. Find your perfect fit and style, designed in Nigeria for the world.',
+  title: 'Shop All Products - Fithub Nigeria',
+  description: 'Explore the full collection of Fithub high-performance sportswear and activewear. Find your perfect fit and style, designed in Nigeria for the world.',
 };
 
 

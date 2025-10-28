@@ -1,6 +1,6 @@
-m # Ciwaviv - Modern Sportswear E-commerce
+m # Fithub - Modern Sportswear E-commerce
 
-This is a modern, responsive e-commerce website for a fictional sportswear brand named "Ciwaviv," built with Next.js and styled with Tailwind CSS.
+This is a modern, responsive e-commerce website for a fictional sportswear brand named "Fithub," built with Next.js and styled with Tailwind CSS.
 
 The project demonstrates a sleek, performance-focused site that matches the brand’s energetic identity and allows users to browse and purchase athletic apparel easily.
 
@@ -18,8 +18,8 @@ Follow these instructions to get a copy of the project up and running on your lo
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/your-username/ciwaviv.git
-    cd ciwaviv
+    git clone https://github.com/your-username/Fithub.git
+    cd Fithub
     ```
 
 2.  **Install dependencies:**

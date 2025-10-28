@@ -1,5 +1,5 @@
 <svg width="120" height="40" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" fill="currentColor">
-  <title>Ciwaviv Logo</title>
+  <title>Fithub Logo</title>
   <style>
     .text {
       font-family: 'Poppins', sans-serif;
@@ -8,5 +8,5 @@
       letter-spacing: -1px;
     }
   </style>
-  <text x="0" y="29" class="text">CIWAVIV</text>
+  <text x="0" y="29" class="text">Fithub</text>
 </svg>

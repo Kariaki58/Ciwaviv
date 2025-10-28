@@ -1,4 +1,4 @@
-# **App Name**: Ciwaviv
+# **App Name**: Fithub
 
 ## Core Features:
 

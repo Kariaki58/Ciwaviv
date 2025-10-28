@@ -1,7 +1,6 @@
 
 import Link from 'next/link';
 import Logo from '@/components/logo';
-import ThemeToggle from '@/components/theme-toggle';
 import CartIcon from '@/components/cart/cart-icon';
 import MobileNav from './mobile-nav';
 
@@ -46,7 +45,6 @@ export default function Header() {
         </div>
 
         <div className="flex items-center justify-end gap-2">
-          <ThemeToggle />
           <CartIcon />
         </div>
       </div>

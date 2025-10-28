@@ -49,7 +49,7 @@ export default function Footer() {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t flex flex-col md:flex-row justify-between items-center">
           <p className="text-muted-foreground text-sm mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} Ciwaviv Nigeria. All Rights Reserved.
+            &copy; {new Date().getFullYear()} Fithub Nigeria. All Rights Reserved.
           </p>
           <div className="flex space-x-4">
             <Link href="#" className="text-muted-foreground hover:text-primary">

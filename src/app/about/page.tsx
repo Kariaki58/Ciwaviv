@@ -4,8 +4,8 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 
 export const metadata: Metadata = {
-  title: 'Our Story - About Ciwaviv',
-  description: 'Learn about the Ciwaviv story. Our mission is to innovate sportswear in Nigeria and worldwide, with a commitment to performance, style, and sustainability.',
+  title: 'Our Story - About Fithub',
+  description: 'Learn about the Fithub story. Our mission is to innovate sportswear in Nigeria and worldwide, with a commitment to performance, style, and sustainability.',
 };
 
 export default function AboutPage() {
@@ -19,7 +19,7 @@ export default function AboutPage() {
             Movement is Life. We Design For It.
           </h1>
           <p className="max-w-3xl mx-auto text-lg text-muted-foreground">
-            Ciwaviv was born from a simple idea: that your gear should amplify your energy, not hold you back. We create high-performance activewear that seamlessly blends cutting-edge technology with bold, modern style, right here in Nigeria.
+            Fithub was born from a simple idea: that your gear should amplify your energy, not hold you back. We create high-performance activewear that seamlessly blends cutting-edge technology with bold, modern style, right here in Nigeria.
           </p>
         </section>
 
@@ -29,7 +29,7 @@ export default function AboutPage() {
             <div className="md:col-span-6 relative h-96 rounded-lg overflow-hidden shadow-lg">
               <Image
                 src="https://picsum.photos/seed/about1/1200/800"
-                alt="Diverse group of athletes wearing Ciwaviv"
+                alt="Diverse group of athletes wearing Fithub"
                 fill
                 className="object-cover"
                 data-ai-hint="diverse athletes"
@@ -38,7 +38,7 @@ export default function AboutPage() {
             <div className="md:col-span-4 relative h-96 rounded-lg overflow-hidden shadow-lg">
               <Image
                 src="https://picsum.photos/seed/about2/800/1200"
-                alt="Close-up of Ciwaviv sportswear fabric"
+                alt="Close-up of Fithub sportswear fabric"
                 fill
                 className="object-cover"
                 data-ai-hint="sportswear fabric"
@@ -76,7 +76,7 @@ export default function AboutPage() {
           <div className="relative h-[500px] w-full rounded-lg overflow-hidden shadow-lg">
             <Image
               src="https://picsum.photos/seed/about3/800/1000"
-              alt="Designer sketching Ciwaviv sportswear"
+              alt="Designer sketching Fithub sportswear"
               fill
               className="object-cover"
               data-ai-hint="designer sketch"

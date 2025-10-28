@@ -115,11 +115,11 @@ export default function ContactPage() {
               <div className="space-y-4">
                 <Link href="#" className="flex items-center group">
                   <Instagram className="h-6 w-6 mr-3 text-muted-foreground group-hover:text-primary" />
-                  <span className="group-hover:text-primary">@ciwaviv_active</span>
+                  <span className="group-hover:text-primary">@Fithub_active</span>
                 </Link>
                 <Link href="#" className="flex items-center group">
                   <Twitter className="h-6 w-6 mr-3 text-muted-foreground group-hover:text-primary" />
-                  <span className="group-hover:text-primary">@ciwaviv</span>
+                  <span className="group-hover:text-primary">@Fithub</span>
                 </Link>
                 <Link href="#" className="flex items-center group">
                   <MessageCircle className="h-6 w-6 mr-3 text-muted-foreground group-hover:text-primary" />

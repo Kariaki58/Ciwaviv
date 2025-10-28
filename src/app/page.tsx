@@ -61,7 +61,7 @@ export default function Home() {
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
             Discover our latest arrivals, combining cutting-edge tech with bold, modern designs.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -78,7 +78,7 @@ export default function Home() {
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
             Trusted by athletes. Loved by all. These are the styles that are flying off the shelves.
           </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2  lg:grid-cols-4 gap-8">
             {bestSellers.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -100,7 +100,7 @@ export default function Home() {
             <div className="relative h-[500px] w-full rounded-lg overflow-hidden shadow-lg">
               <Image
                 src="/gemini_1.png"
-                alt="Man wearing Ciwaviv sportswear"
+                alt="Man wearing Fithub sportswear"
                 fill
                 className="object-cover"
                 data-ai-hint="male athlete"
@@ -112,7 +112,7 @@ export default function Home() {
                 Unleash Your Potential
               </h2>
               <p className="text-lg text-muted-foreground mb-8">
-                Every piece in our collection is crafted with precision, using advanced materials that offer superior breathability, flexibility, and durability. Stop settling for less. Elevate your performance and conquer your goals with Ciwaviv.
+                Every piece in our collection is crafted with precision, using advanced materials that offer superior breathability, flexibility, and durability. Stop settling for less. Elevate your performance and conquer your goals with Fithub.
               </p>
               <Button asChild size="lg" variant="outline">
                 <Link href="/shop?category=men">Shop Men's</Link>
@@ -141,7 +141,7 @@ export default function Home() {
             <div className="relative h-[500px] w-full rounded-lg overflow-hidden shadow-lg md:order-1">
               <Image
                 src="/gemini_3.png"
-                alt="Woman wearing Ciwaviv sportswear"
+                alt="Woman wearing Fithub sportswear"
                 fill
                 className="object-cover"
                 data-ai-hint="female athlete"
@@ -151,11 +151,11 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Ciwaviv Styles Section */}
+      {/* Fithub Styles Section */}
       <section className="py-16 md:py-24 bg-background">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-headline font-bold text-center mb-4">
-            #CIWAVIVSTYLES
+            #FithubSTYLES
           </h2>
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
             See how our community moves. Tag us on social media for a chance to be featured.
