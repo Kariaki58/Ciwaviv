@@ -61,7 +61,7 @@ export default function Home() {
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
             Discover our latest arrivals, combining cutting-edge tech with bold, modern designs.
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
             {featuredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
@@ -78,7 +78,7 @@ export default function Home() {
           <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
             Trusted by athletes. Loved by all. These are the styles that are flying off the shelves.
           </p>
-          <div className="grid grid-cols-2  lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2  lg:grid-cols-4 gap-2">
             {bestSellers.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
