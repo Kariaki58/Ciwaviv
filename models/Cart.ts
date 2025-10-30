@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, models } from 'mongoose';
 import { ICart, ICartItem } from '../types/mongoose';
 
 const cartItemSchema = new Schema<ICartItem>({
@@ -59,4 +59,4 @@ cartSchema.pre('save', function(next) {
 
 cartSchema.index({ customer: 1 });
 
-export const Cart = model<ICart>('Cart', cartSchema);
+export const Cart = models.Cart || model<ICart>('Cart', cartSchema);

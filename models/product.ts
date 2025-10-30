@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, models } from 'mongoose';
 import { IProduct, IImage } from '../types/mongoose';
 
 const imageSchema = new Schema<IImage>({
@@ -8,16 +8,19 @@ const imageSchema = new Schema<IImage>({
 });
 
 const productSchema = new Schema<IProduct>({
-  name: { 
+  name: {
     type: String, 
     required: true,
     trim: true
   },
-  slug: { 
+  slug: {
     type: String, 
     required: true,
     unique: true,
     lowercase: true
+  },
+  sold: {
+    type: Number
   },
   description: { 
     type: String, 
@@ -34,15 +37,6 @@ const productSchema = new Schema<IProduct>({
     ref: 'Category',
     required: true 
   },
-  seller: { 
-    type: Schema.Types.ObjectId, 
-    ref: 'User',
-    required: true 
-  },
-  tags: [{ 
-    type: String,
-    lowercase: true 
-  }],
   sizes: [{ 
     type: String 
   }],
@@ -77,8 +71,8 @@ const productSchema = new Schema<IProduct>({
 });
 
 // Index for better search performance
-productSchema.index({ name: 'text', description: 'text', tags: 'text' });
+productSchema.index({ name: 'text', description: 'text' });
 productSchema.index({ category: 1, isActive: 1 });
 productSchema.index({ seller: 1 });
 
-export const Product = model<IProduct>('Product', productSchema);
+export const Product = models.Product || model("Product", productSchema);

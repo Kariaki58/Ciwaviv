@@ -42,25 +42,6 @@ export default function ProductFilters({ onFilterChange, filters }: ProductFilte
             </Select>
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="price">
-          <AccordionTrigger className="text-lg font-semibold">Price</AccordionTrigger>
-          <AccordionContent>
-            <Select
-              value={filters.price}
-              onValueChange={(value) => onFilterChange({ ...filters, price: value })}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Select a price range" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">All</SelectItem>
-                <SelectItem value="under-50">Under $50</SelectItem>
-                <SelectItem value="50-100">$50 - $100</SelectItem>
-                <SelectItem value="over-100">Over $100</SelectItem>
-              </SelectContent>
-            </Select>
-          </AccordionContent>
-        </AccordionItem>
         <AccordionItem value="sort">
           <AccordionTrigger className="text-lg font-semibold">Sort By</AccordionTrigger>
           <AccordionContent>

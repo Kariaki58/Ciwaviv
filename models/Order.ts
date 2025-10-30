@@ -1,5 +1,5 @@
-import { Schema, model } from 'mongoose';
-import { IOrder, IOrderItem } from '../types/mongoose';
+import { Schema, model, models } from 'mongoose';
+import { IOrder, IOrderItem, ICustomerInfo, IShippingAddress } from '../types/mongoose';
 
 const orderItemSchema = new Schema<IOrderItem>({
   product: { 
@@ -36,16 +36,30 @@ const orderItemSchema = new Schema<IOrderItem>({
   }
 });
 
+const customerInfoSchema = new Schema<ICustomerInfo>({
+  email: { type: String, required: true },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
+  phone: { type: String, required: true }
+});
+
+const shippingAddressSchema = new Schema<IShippingAddress>({
+  street: { type: String, required: true },
+  city: { type: String, required: true },
+  state: { type: String, required: true },
+  country: { type: String, required: true, default: 'Nigeria' },
+  zipCode: { type: String }
+});
+
 const orderSchema = new Schema<IOrder>({
   orderNumber: { 
     type: String, 
     required: true,
     unique: true 
   },
-  customer: { 
-    type: Schema.Types.ObjectId, 
-    ref: 'Customer',
-    required: true 
+  customer: {
+    type: customerInfoSchema,
+    required: true
   },
   items: [orderItemSchema],
   subtotal: { 
@@ -74,23 +88,18 @@ const orderSchema = new Schema<IOrder>({
     enum: ['pending', 'paid', 'failed', 'refunded'],
     default: 'pending' 
   },
-  shippingAddress: {
-    street: { type: String, required: true },
-    city: { type: String, required: true },
-    state: { type: String, required: true },
-    country: { type: String, required: true },
-    zipCode: { type: String, required: true }
-  },
-  billingAddress: {
-    street: { type: String, required: true },
-    city: { type: String, required: true },
-    state: { type: String, required: true },
-    country: { type: String, required: true },
-    zipCode: { type: String, required: true }
-  },
   paymentMethod: { 
     type: String, 
-    required: true 
+    default: 'paystack' 
+  },
+  paystackReference: {
+    type: String,
+    unique: true,
+    sparse: true
+  },
+  shippingAddress: {
+    type: shippingAddressSchema,
+    required: true
   },
   trackingNumber: { 
     type: String 
@@ -108,17 +117,11 @@ const orderSchema = new Schema<IOrder>({
   timestamps: true
 });
 
-// Generate order number before saving
-orderSchema.pre('save', function(next) {
-  if (!this.orderNumber) {
-    this.orderNumber = `ORD-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
-  }
-  next();
-});
 
-orderSchema.index({ customer: 1 });
+orderSchema.index({ 'customer.email': 1 });
 orderSchema.index({ orderNumber: 1 });
 orderSchema.index({ status: 1 });
+orderSchema.index({ paymentStatus: 1 });
 orderSchema.index({ createdAt: -1 });
 
-export const Order = model<IOrder>('Order', orderSchema);
+export const Order = models.Order || model<IOrder>('Order', orderSchema);

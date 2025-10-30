@@ -11,6 +11,7 @@ export interface IProduct extends Document {
   slug: string;
   description: string;
   price: number;
+  sold: number;
   images: IImage[];
   category: Types.ObjectId;
   seller: Types.ObjectId;
@@ -27,6 +28,7 @@ export interface IProduct extends Document {
 }
 
 export interface IUser extends Document {
+  _id: string;
   name: string;
   email: string;
   password: string;
@@ -75,17 +77,9 @@ export interface IAddress extends Document {
 }
 
 export interface ICustomer extends Document {
-  user: Types.ObjectId;
+  name: string;
+  email: string
   phone?: string;
-  dateOfBirth?: Date;
-  addresses: IAddress[];
-  preferences: {
-    newsletter: boolean;
-    marketingEmails: boolean;
-    sizePreference?: string;
-    categoryPreferences: Types.ObjectId[];
-  };
-  loyaltyPoints: number;
   totalOrders: number;
   totalSpent: number;
   createdAt: Date;
@@ -110,7 +104,7 @@ export interface ICart extends Document {
   updatedAt: Date;
 }
 
-export interface IOrderItem extends Document {
+export interface IOrderItem {
   product: Types.ObjectId;
   productName: string;
   productImage: string;
@@ -121,9 +115,24 @@ export interface IOrderItem extends Document {
   subtotal: number;
 }
 
+export interface ICustomerInfo {
+  email: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+}
+
+export interface IShippingAddress {
+  street: string;
+  city: string;
+  state: string;
+  country: string;
+  zipCode?: string;
+}
+
 export interface IOrder extends Document {
   orderNumber: string;
-  customer: Types.ObjectId;
+  customer: ICustomerInfo;
   items: IOrderItem[];
   subtotal: number;
   shippingFee: number;
@@ -131,21 +140,9 @@ export interface IOrder extends Document {
   totalAmount: number;
   status: 'pending' | 'confirmed' | 'processing' | 'shipped' | 'delivered' | 'cancelled' | 'refunded';
   paymentStatus: 'pending' | 'paid' | 'failed' | 'refunded';
-  shippingAddress: {
-    street: string;
-    city: string;
-    state: string;
-    country: string;
-    zipCode: string;
-  };
-  billingAddress: {
-    street: string;
-    city: string;
-    state: string;
-    country: string;
-    zipCode: string;
-  };
   paymentMethod: string;
+  paystackReference?: string;
+  shippingAddress: IShippingAddress;
   trackingNumber?: string;
   shippingProvider?: string;
   estimatedDelivery?: Date;

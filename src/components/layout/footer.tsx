@@ -1,11 +1,62 @@
+"use client";
 
 import Link from 'next/link';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import Logo from '@/components/logo';
 import { Instagram, Twitter, Facebook } from 'lucide-react';
+import { useState } from 'react';
+import { useToast } from '@/hooks/use-toast';
 
 export default function Footer() {
+  const [email, setEmail] = useState('');
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    if (!email) {
+      toast({
+        title: "Error",
+        description: "Please enter your email address",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const response = await fetch('/api/customers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        toast({
+          title: "Success!",
+          description: "You've been subscribed to our newsletter",
+        });
+        setEmail('');
+      } else {
+        throw new Error(data.error || 'Failed to subscribe');
+      }
+    } catch (error: any) {
+      toast({
+        title: "Subscription Failed",
+        description: error.message,
+        variant: "destructive"
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <footer className="bg-card text-card-foreground">
       <div className="container mx-auto px-4 py-12">
@@ -18,9 +69,22 @@ export default function Footer() {
             <p className="text-muted-foreground mb-4 max-w-sm">
               Sign up for our newsletter to get the latest news, drops, and deals from our Nigerian brand.
             </p>
-            <form className="flex gap-2 max-w-sm">
-              <Input type="email" placeholder="Enter your email" className="flex-grow" />
-              <Button type="submit" className="bg-primary text-primary-foreground hover:bg-primary/90">Subscribe</Button>
+            <form onSubmit={handleNewsletterSubmit} className="flex gap-2 max-w-sm">
+              <Input 
+                type="email" 
+                placeholder="Enter your email" 
+                className="flex-grow"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={loading}
+              />
+              <Button 
+                type="submit" 
+                className="bg-primary text-primary-foreground hover:bg-primary/90"
+                disabled={loading}
+              >
+                {loading ? "Subscribing..." : "Subscribe"}
+              </Button>
             </form>
           </div>
 
