@@ -37,8 +37,18 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    const userId = session?.user?.id;
+    if (!userId) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const body = await req.json();
     await connectToDatabase();
+
+    const user = await User.findById(userId);
+    if (!user || user.role !== 'admin') {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
 
     // Clear existing specific prices
     await Shipping.deleteMany({ type: 'specific' });

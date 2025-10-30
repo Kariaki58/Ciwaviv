@@ -25,7 +25,7 @@ export async function POST(req: NextRequest) {
         if (!user) {
             return NextResponse.json({ error: "User not found" }, { status: 404 });
         }
-        if (user.role === "customer") {
+        if (user.role !== "admin") {
             return NextResponse.json({ error: "You are not authorized" }, { status: 403 });
         }
 

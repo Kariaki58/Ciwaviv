@@ -135,8 +135,8 @@ export default function Sidebar() {
           />
           {!collapsed && (
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-white truncate">John Doe</p>
-              <p className="text-sm text-gray-400 truncate">admin@example.com</p>
+              <p className="text-sm font-medium text-white truncate">Ciwaviv</p>
+              <p className="text-sm text-gray-400 truncate">admin@ciwaviv.com</p>
             </div>
           )}
         </div>

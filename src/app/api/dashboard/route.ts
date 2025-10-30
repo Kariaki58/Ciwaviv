@@ -5,6 +5,7 @@ import connectToDatabase from "../../../../config/database";
 import { Order } from "../../../../models/Order";
 import { Customer } from "../../../../models/customer";
 import { Product } from "../../../../models/product";
+import { User } from "../../../../models/user";
 
 
 export async function GET(req: NextRequest) {
@@ -14,10 +15,20 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
+    const userId = session?.user?.id;
+    if (!userId) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const { searchParams } = new URL(req.url);
     const range = searchParams.get('range') || 'week';
 
     await connectToDatabase();
+
+    const user = await User.findById(userId);
+    if (!user || user.role !== 'admin') {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
 
     // Calculate date ranges
     const now = new Date();

@@ -8,7 +8,6 @@ export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   console.log({ pathname })
-
   // Only protect /admin routes
   if (!pathname.startsWith("/admin")) {
     return NextResponse.next();
@@ -33,7 +32,7 @@ export async function middleware(req: NextRequest) {
 
   // Logged in but not admin → redirect to home
   if (token.role !== "admin") {
-    return NextResponse.redirect(new URL("/", req.url));
+    return NextResponse.redirect(new URL("/auth/login", req.url));
   }
 
   // User is admin → allow access

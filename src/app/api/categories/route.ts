@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectToDatabase from "../../../../config/database";
 import { Category } from "../../../../models/category";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/auth";
+import { User } from "../../../../models/user";
 
 export async function GET(req: NextRequest) {
   try {
@@ -23,12 +26,29 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
-    await connectToDatabase();
     
     const { name, slug } = await req.json();
+
+    const session = await getServerSession(authOptions);
+    
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const userId = session?.user?.id;
+    if (!userId) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
     
     if (!name) {
       return NextResponse.json({ error: "Category name is required" }, { status: 400 });
+    }
+    await connectToDatabase();
+
+    
+    const user = await User.findById(userId);
+    if (!user || user.role !== 'admin') {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
     const categorySlug = slug || name.toLowerCase().replace(/[^a-z0-9]/g, '-');
