@@ -18,7 +18,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           <div
             className="
               relative w-full overflow-hidden 
-              h-52 sm:h-56 md:h-64 lg:h-72 xl:h-80
+              h-52 sm:h-56 md:h-60 lg:h-72 xl:h-80
             "
           >
             <Image

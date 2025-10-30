@@ -118,7 +118,7 @@ export default async function Home() {
           </p>
           
           {featuredProducts.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
               {featuredProducts.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
@@ -142,7 +142,7 @@ export default async function Home() {
           </p>
           
           {bestSellers.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
               {bestSellers.map((product) => (
                 <ProductCard key={product.id} product={product} />
               ))}
