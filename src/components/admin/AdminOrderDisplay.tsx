@@ -11,7 +11,14 @@ import {
   Edit, 
   Eye,
   ChevronLeft,
-  ChevronRight
+  ChevronRight,
+  User,
+  Calendar,
+  DollarSign,
+  Package,
+  Phone,
+  Mail,
+  MapPin
 } from 'lucide-react';
 import { formatPrice } from '@/lib/utils';
 import { format } from 'date-fns';
@@ -192,7 +199,7 @@ export default function AdminOrderDisplay() {
   const renderPagination = () => {
     const { currentPage, totalPages } = pagination;
     const pages = [];
-    const maxVisiblePages = 5;
+    const maxVisiblePages = 3; // Reduced for mobile
 
     let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
     let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
@@ -209,73 +216,43 @@ export default function AdminOrderDisplay() {
           variant="outline"
           size="sm"
           onClick={() => handlePageChange(currentPage - 1)}
-          className="flex items-center gap-1 border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white"
+          className="flex items-center gap-1 border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white text-xs"
         >
-          <ChevronLeft className="h-4 w-4" />
-          <span className="hidden sm:inline">Previous</span>
+          <ChevronLeft className="h-3 w-3" />
+          <span>Prev</span>
         </Button>
       );
     }
 
-    // First page and ellipsis
-    if (startPage > 1) {
-      pages.push(
-        <Button
-          key={1}
-          variant="outline"
-          size="sm"
-          onClick={() => handlePageChange(1)}
-          className="min-w-10 border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white"
-        >
-          1
-        </Button>
-      );
-      if (startPage > 2) {
+    // Page numbers - show only current page on mobile
+    if (totalPages <= 5) {
+      for (let i = startPage; i <= endPage; i++) {
         pages.push(
-          <span key="ellipsis-start" className="px-2 py-1 text-sm text-gray-400">
-            ...
-          </span>
+          <Button
+            key={i}
+            variant={currentPage === i ? "default" : "outline"}
+            size="sm"
+            onClick={() => handlePageChange(i)}
+            className={`min-w-8 text-xs ${
+              currentPage === i 
+                ? "bg-primary text-white border-primary" 
+                : "border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white"
+            }`}
+          >
+            {i}
+          </Button>
         );
       }
-    }
-
-    // Page numbers
-    for (let i = startPage; i <= endPage; i++) {
+    } else {
+      // Show only current page on mobile for many pages
       pages.push(
         <Button
-          key={i}
-          variant={currentPage === i ? "default" : "outline"}
+          key={currentPage}
+          variant="default"
           size="sm"
-          onClick={() => handlePageChange(i)}
-          className={`min-w-10 ${
-            currentPage === i 
-              ? "bg-primary text-white border-primary" 
-              : "border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white"
-          }`}
+          className="min-w-8 text-xs bg-primary text-white border-primary"
         >
-          {i}
-        </Button>
-      );
-    }
-
-    // Last page and ellipsis
-    if (endPage < totalPages) {
-      if (endPage < totalPages - 1) {
-        pages.push(
-          <span key="ellipsis-end" className="px-2 py-1 text-sm text-gray-400">
-            ...
-          </span>
-        );
-      }
-      pages.push(
-        <Button
-          key={totalPages}
-          variant="outline"
-          size="sm"
-          onClick={() => handlePageChange(totalPages)}
-          className="min-w-10 border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white"
-        >
-          {totalPages}
+          {currentPage}
         </Button>
       );
     }
@@ -288,10 +265,10 @@ export default function AdminOrderDisplay() {
           variant="outline"
           size="sm"
           onClick={() => handlePageChange(currentPage + 1)}
-          className="flex items-center gap-1 border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white"
+          className="flex items-center gap-1 border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white text-xs"
         >
-          <span className="hidden sm:inline">Next</span>
-          <ChevronRight className="h-4 w-4" />
+          <span>Next</span>
+          <ChevronRight className="h-3 w-3" />
         </Button>
       );
     }
@@ -301,43 +278,47 @@ export default function AdminOrderDisplay() {
 
   if (loading && orders.length === 0) {
     return (
-      <div className="flex-1 bg-gray-800 flex items-center justify-center">
+      <div className="flex-1 bg-gray-800 flex items-center justify-center p-4">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-          <p className="mt-4 text-gray-300">Loading orders...</p>
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto"></div>
+          <p className="mt-3 text-gray-300 text-sm">Loading orders...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="flex-1 bg-gray-800 p-4 overflow-auto">
-      <div className="max-w-screen-lg mx-auto">
-        {/* Header */}
-        <div className="mb-6 lg:mb-8">
-          <h1 className="text-2xl lg:text-3xl font-bold text-white">Orders Management</h1>
-          <p className="mt-2 text-sm text-gray-300">
-            Manage and track customer orders
-          </p>
+    <div className="flex-1 bg-gray-800 p-3 overflow-auto">
+      <div className="max-w-screen-2xl mx-auto">
+        {/* Header - Mobile Optimized */}
+        <div className="mb-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-xl font-bold text-white">Orders</h1>
+              <p className="mt-1 text-xs text-gray-300">
+                {pagination.totalOrders} total orders
+              </p>
+            </div>
+          </div>
         </div>
 
-        {/* Filters */}
-        <Card className="mb-6 bg-gray-700 border-gray-600">
-          <CardContent className="pt-6">
-            <div className="flex flex-col sm:flex-row gap-4">
-              <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+        {/* Filters - Mobile Optimized */}
+        <Card className="mb-4 bg-gray-700 border-gray-600">
+          <CardContent className="p-3">
+            <div className="space-y-3">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-3 w-3" />
                 <Input
-                  placeholder="Search orders, customers..."
+                  placeholder="Search orders..."
                   value={filters.search}
                   onChange={(e) => handleFilterChange('search', e.target.value)}
-                  className="pl-10 bg-gray-600 border-gray-500 text-white placeholder-gray-400 focus:border-primary"
+                  className="pl-9 bg-gray-600 border-gray-500 text-white placeholder-gray-400 focus:border-primary text-sm h-9"
                 />
               </div>
               <select
                 value={filters.status}
                 onChange={(e) => handleFilterChange('status', e.target.value)}
-                className="px-3 py-2 bg-gray-600 border border-gray-500 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
+                className="w-full px-3 py-2 bg-gray-600 border border-gray-500 text-white rounded-md focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary text-sm h-9"
               >
                 {statusOptions.map(option => (
                   <option key={option.value} value={option.value}>
@@ -351,166 +332,175 @@ export default function AdminOrderDisplay() {
 
         {/* Error Message */}
         {error && (
-          <div className="mb-6 rounded-md bg-red-500/20 border border-red-500/30 p-4">
-            <div className="text-sm text-red-300">{error}</div>
+          <div className="mb-4 rounded-md bg-red-500/20 border border-red-500/30 p-3">
+            <div className="text-xs text-red-300">{error}</div>
           </div>
         )}
 
-        {/* Orders Table */}
-        <Card className="bg-gray-700 border-gray-600">
-          <CardHeader>
-            <CardTitle className="text-white">All Orders ({pagination.totalOrders})</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-gray-600">
-                <thead className="bg-gray-600">
-                  <tr>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                      Order
-                    </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider hidden sm:table-cell">
-                      Customer
-                    </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                      Amount
-                    </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider hidden md:table-cell">
-                      Status
-                    </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider hidden lg:table-cell">
-                      Payment
-                    </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider hidden xl:table-cell">
-                      Date
-                    </th>
-                    <th className="px-4 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-gray-700 divide-y divide-gray-600">
-                  {orders.map((order) => (
-                    <tr key={order.id} className="hover:bg-gray-600/50 transition-colors">
-                      <td className="px-4 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-white">
-                          {order.orderNumber}
-                        </div>
-                        <div className="text-sm text-gray-300 sm:hidden">
-                          {order.customer.firstName} {order.customer.lastName}
-                        </div>
-                        <div className="text-xs text-gray-400 md:hidden">
-                          {order.items.length} item{order.items.length !== 1 ? 's' : ''} • {formatPrice(order.totalAmount)}
-                        </div>
-                      </td>
-                      <td className="px-4 py-4 whitespace-nowrap hidden sm:table-cell">
-                        <div className="text-sm font-medium text-white">
-                          {order.customer.firstName} {order.customer.lastName}
-                        </div>
-                        <div className="text-sm text-gray-300">
-                          {order.customer.email}
-                        </div>
-                      </td>
-                      <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-white hidden sm:table-cell">
-                        {formatPrice(order.totalAmount)}
-                      </td>
-                      <td className="px-4 py-4 whitespace-nowrap hidden md:table-cell">
-                        <Badge className={`border ${statusColors[order.status] || 'bg-gray-500/20 text-gray-300 border-gray-500/30'}`}>
-                          {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
-                        </Badge>
-                      </td>
-                      <td className="px-4 py-4 whitespace-nowrap hidden lg:table-cell">
-                        <Badge className={`border ${
-                          paymentStatusOptions.find(p => p.value === order.paymentStatus)?.color || 
-                          'bg-gray-500/20 text-gray-300 border-gray-500/30'
-                        }`}>
-                          {order.paymentStatus.charAt(0).toUpperCase() + order.paymentStatus.slice(1)}
-                        </Badge>
-                      </td>
-                      <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-300 hidden xl:table-cell">
-                        {format(new Date(order.createdAt), 'MMM dd, yyyy')}
-                      </td>
-                      <td className="px-4 py-4 whitespace-nowrap text-sm font-medium">
-                        <div className="flex space-x-2">
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => handleViewOrder(order)}
-                            className="border-gray-500 bg-transparent text-gray-300 hover:bg-gray-600 hover:text-white"
-                            title="View Order"
-                          >
-                            <Eye className="h-4 w-4" />
-                          </Button>
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => handleEditOrder(order)}
-                            className="border-gray-500 text-green-300 bg-transparent hover:bg-gray-600 hover:text-white"
-                            title="Edit Order"
-                          >
-                            <Edit className="h-4 w-4" />
-                          </Button>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+        {/* Mobile Cards - Enhanced */}
+        <div className="space-y-3">
+          {orders.map((order) => (
+            <Card key={order.id} className="bg-gray-700 border-gray-600 hover:bg-gray-600/50 transition-colors">
+              <CardContent className="p-4">
+                {/* Order Header */}
+                <div className="flex justify-between items-start mb-3">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <div className="text-sm font-bold text-white">
+                        #{order.orderNumber}
+                      </div>
+                      <Badge className={`border text-xs ${statusColors[order.status] || 'bg-gray-500/20 text-gray-300 border-gray-500/30'}`}>
+                        {order.status.charAt(0).toUpperCase() + order.status.slice(1)}
+                      </Badge>
+                    </div>
+                    <div className="text-xs text-gray-300 flex items-center gap-1">
+                      <Calendar className="h-3 w-3" />
+                      {format(new Date(order.createdAt), 'MMM dd, yyyy')}
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-sm font-bold text-white">
+                      {formatPrice(order.totalAmount)}
+                    </div>
+                    <Badge className={`border text-xs mt-1 ${
+                      paymentStatusOptions.find(p => p.value === order.paymentStatus)?.color || 
+                      'bg-gray-500/20 text-gray-300 border-gray-500/30'
+                    }`}>
+                      {order.paymentStatus}
+                    </Badge>
+                  </div>
+                </div>
+
+                {/* Customer Info */}
+                <div className="space-y-2 mb-3">
+                  <div className="flex items-center gap-2">
+                    <User className="h-3 w-3 text-gray-400 flex-shrink-0" />
+                    <div className="text-xs text-gray-300 truncate">
+                      {order.customer.firstName} {order.customer.lastName}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Mail className="h-3 w-3 text-gray-400 flex-shrink-0" />
+                    <div className="text-xs text-gray-300 truncate">
+                      {order.customer.email}
+                    </div>
+                  </div>
+                  {order.customer.phone && (
+                    <div className="flex items-center gap-2">
+                      <Phone className="h-3 w-3 text-gray-400 flex-shrink-0" />
+                      <div className="text-xs text-gray-300">
+                        {order.customer.phone}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Order Details */}
+                <div className="grid grid-cols-2 gap-3 text-xs mb-3 p-2 bg-gray-600/50 rounded-lg">
+                  <div>
+                    <div className="text-gray-400">Items</div>
+                    <div className="text-white font-medium flex items-center gap-1">
+                      <Package className="h-3 w-3" />
+                      {order.items.length} item{order.items.length !== 1 ? 's' : ''}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-gray-400">Payment</div>
+                    <div className="text-white font-medium capitalize">
+                      {order.paymentMethod}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Shipping Address Preview */}
+                {order.shippingAddress && (
+                  <div className="flex items-start gap-2 mb-3 p-2 bg-gray-600/30 rounded-lg">
+                    <MapPin className="h-3 w-3 text-gray-400 mt-0.5 flex-shrink-0" />
+                    <div className="text-xs text-gray-300">
+                      {order.shippingAddress.city}, {order.shippingAddress.state}
+                    </div>
+                  </div>
+                )}
+
+                {/* Actions */}
+                <div className="flex justify-between items-center pt-3 border-t border-gray-600">
+                  <div className="text-xs text-gray-400">
+                    {order.items.reduce((total, item) => total + item.quantity, 0)} units
+                  </div>
+                  <div className="flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleViewOrder(order)}
+                      className="border-gray-500 bg-gray-600 text-gray-300 hover:bg-gray-500 hover:text-white text-xs h-8 px-3"
+                    >
+                      <Eye className="h-3 w-3 mr-1" />
+                      View
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => handleEditOrder(order)}
+                      className="border-gray-500 bg-gray-600 text-green-300 hover:bg-gray-500 hover:text-white text-xs h-8 px-3"
+                    >
+                      <Edit className="h-3 w-3 mr-1" />
+                      Edit
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+
+        {/* Empty State */}
+        {orders.length === 0 && !loading && (
+          <Card className="bg-gray-700 border-gray-600">
+            <CardContent className="p-6 text-center">
+              <div className="text-gray-400 mb-3">
+                <Filter className="mx-auto h-8 w-8" />
+              </div>
+              <h3 className="text-sm font-medium text-white mb-2">No orders found</h3>
+              <p className="text-gray-400 text-xs">
+                {filters.search || filters.status !== 'all' 
+                  ? "Try adjusting your search or filters." 
+                  : "No orders have been placed yet."
+                }
+              </p>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Pagination - Mobile Optimized */}
+        {pagination.totalPages > 1 && (
+          <div className="mt-4 flex flex-col items-center justify-center gap-3">
+            <div className="text-xs text-gray-300 text-center">
+              Page {pagination.currentPage} of {pagination.totalPages}
             </div>
-
-            {/* Empty State */}
-            {orders.length === 0 && !loading && (
-              <div className="text-center py-12">
-                <div className="text-gray-400 mb-4">
-                  <Filter className="mx-auto h-12 w-12" />
-                </div>
-                <h3 className="text-lg font-medium text-white mb-2">No orders found</h3>
-                <p className="text-gray-400">
-                  {filters.search || filters.status !== 'all' 
-                    ? "Try adjusting your search or filters." 
-                    : "No orders have been placed yet."
-                  }
-                </p>
-              </div>
-            )}
-
-            {/* Pagination */}
-            {pagination.totalPages > 1 && (
-              <div className="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div className="text-sm text-gray-300">
-                  Showing{" "}
-                  <span className="font-medium text-white">
-                    {(pagination.currentPage - 1) * pagination.limit + 1}
-                  </span>{" "}
-                  to{" "}
-                  <span className="font-medium text-white">
-                    {Math.min(pagination.currentPage * pagination.limit, pagination.totalOrders)}
-                  </span>{" "}
-                  of <span className="font-medium text-white">{pagination.totalOrders}</span> orders
-                </div>
-                <div className="flex flex-wrap gap-2 justify-center">
-                  {renderPagination()}
-                </div>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        {/* Modals */}
-        <OrderViewModal
-          key={selectedOrder?.id}
-          order={selectedOrder}
-          isOpen={isViewModalOpen}
-          onClose={() => setIsViewModalOpen(false)}
-        />
-
-        <OrderEditModal
-          order={selectedOrder}
-          isOpen={isEditModalOpen}
-          onClose={() => setIsEditModalOpen(false)}
-          onUpdate={handleOrderUpdate}
-        />
+            <div className="flex gap-2 justify-center">
+              {renderPagination()}
+            </div>
+            <div className="text-xs text-gray-400 text-center">
+              Showing {Math.min(pagination.currentPage * pagination.limit, pagination.totalOrders)} of {pagination.totalOrders} orders
+            </div>
+          </div>
+        )}
       </div>
+
+      {/* Modals */}
+      <OrderViewModal
+        key={selectedOrder?.id}
+        order={selectedOrder}
+        isOpen={isViewModalOpen}
+        onClose={() => setIsViewModalOpen(false)}
+      />
+
+      <OrderEditModal
+        order={selectedOrder}
+        isOpen={isEditModalOpen}
+        onClose={() => setIsEditModalOpen(false)}
+        onUpdate={handleOrderUpdate}
+      />
     </div>
   );
 }

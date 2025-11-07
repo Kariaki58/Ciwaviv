@@ -28,7 +28,7 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-10 gap-4">
             <div className="md:col-span-6 relative h-96 rounded-lg overflow-hidden shadow-lg">
               <Image
-                src="https://picsum.photos/seed/about1/1200/800"
+                src="/fithub_2.jpg"
                 alt="Diverse group of athletes wearing Fithub"
                 fill
                 className="object-cover"
@@ -37,7 +37,7 @@ export default function AboutPage() {
             </div>
             <div className="md:col-span-4 relative h-96 rounded-lg overflow-hidden shadow-lg">
               <Image
-                src="https://picsum.photos/seed/about2/800/1200"
+                src="/fithub_6.jpg"
                 alt="Close-up of Fithub sportswear fabric"
                 fill
                 className="object-cover"
@@ -54,7 +54,7 @@ export default function AboutPage() {
               Our Mission: To Empower Your Every Move
             </h2>
             <p className="text-lg text-muted-foreground mb-8">
-              We are relentlessly focused on innovation. Our design process starts with you—the athlete, the yogi, the weekend warrior. We analyze movement, test materials to their limits, and obsess over every stitch to ensure our products deliver unparalleled performance, comfort, and durability.
+              We are relentlessly focused on innovation. Our design process starts with you the athlete, the yogi, the weekend warrior. We analyze movement, test materials to their limits, and obsess over every stitch to ensure our products deliver unparalleled performance, comfort, and durability.
             </p>
             <div className="space-y-4">
               <div className="flex items-start">
@@ -75,7 +75,7 @@ export default function AboutPage() {
           </div>
           <div className="relative h-[500px] w-full rounded-lg overflow-hidden shadow-lg">
             <Image
-              src="https://picsum.photos/seed/about3/800/1000"
+              src="/fithub_3.jpg"
               alt="Designer sketching Fithub sportswear"
               fill
               className="object-cover"

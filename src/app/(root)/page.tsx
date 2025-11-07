@@ -71,7 +71,7 @@ export default async function Home() {
       <section className="relative h-[70vh] md:h-[90vh] w-full">
         <div className="hidden md:block">
           <Image
-            src="/civaviv.png"
+            src="/fithub_8.jpg"
             alt="Athlete in motion"
             fill
             className="object-cover"
@@ -82,7 +82,7 @@ export default async function Home() {
         {/* mobile banner */}
         <div className="block md:hidden">
           <Image
-            src="/ciwaviv_2.png"
+            src="/fithub_8.jpg"
             alt="Athlete in motion"
             fill
             className="object-cover"
@@ -93,12 +93,12 @@ export default async function Home() {
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         <div className="relative z-10 flex flex-col items-center justify-end h-full text-center text-white pb-20 px-4">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-headline font-bold tracking-tight text-primary">
+          {/* <h1 className="text-4xl md:text-6xl lg:text-7xl font-headline font-bold tracking-tight text-primary">
             Wear The Movement
           </h1>
           <p className="mt-4 max-w-2xl text-lg md:text-xl text-neutral-200">
             Engineered for every leap, sprint, and stretch. Our gear is built to amplify your power.
-          </p>
+          </p> */}
           <Button asChild size="lg" className="mt-8 bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-lg">
             <Link href="/shop">
               Shop Now <ArrowRight className="ml-2 h-5 w-5" />
@@ -169,7 +169,7 @@ export default async function Home() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="relative h-[500px] w-full rounded-lg overflow-hidden shadow-lg">
               <Image
-                src="/gemini_1.png"
+                src="/fithub_1.jpg"
                 alt="Man wearing Fithub sportswear"
                 fill
                 className="object-cover"
@@ -210,7 +210,7 @@ export default async function Home() {
             </div>
             <div className="relative h-[500px] w-full rounded-lg overflow-hidden shadow-lg md:order-1">
               <Image
-                src="/gemini_3.png"
+                src="/fithub_12.jpg"
                 alt="Woman wearing Fithub sportswear"
                 fill
                 className="object-cover"
