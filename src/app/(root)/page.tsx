@@ -1,3 +1,4 @@
+"use client";
 
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -22,6 +23,50 @@ interface Product {
   inventory: number;
   sold?: number;
 }
+
+// Category data that can be converted to API later
+const categories = [
+  {
+    id: '1',
+    name: 'Gym Wears',
+    slug: 'gym-wears',
+    image: '/fithub_1.jpg',
+    description: 'Performance-focused apparel for your workouts',
+    productCount: 24
+  },
+  {
+    id: '2',
+    name: 'Fithub Clothes',
+    slug: 'fithub-clothes',
+    image: '/fithub_12.jpg',
+    description: 'Signature collection for everyday athletes',
+    productCount: 18
+  },
+  {
+    id: '3',
+    name: 'Dumbbells',
+    slug: 'dumbbells',
+    image: '/gemini_5.png',
+    description: 'Premium weights for strength training',
+    productCount: 12
+  },
+  {
+    id: '4',
+    name: 'Training Gear',
+    slug: 'training-gear',
+    image: '/gemini_7.png',
+    description: 'Essential equipment for complete workouts',
+    productCount: 15
+  },
+  {
+    id: '5',
+    name: 'Accessories',
+    slug: 'accessories',
+    image: '/gemini_8.png',
+    description: 'Complete your fitness journey',
+    productCount: 8
+  }
+];
 
 async function getFeaturedProducts(): Promise<Product[]> {
   try {
@@ -93,17 +138,59 @@ export default async function Home() {
 
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
         <div className="relative z-10 flex flex-col items-center justify-end h-full text-center text-white pb-20 px-4">
-          {/* <h1 className="text-4xl md:text-6xl lg:text-7xl font-headline font-bold tracking-tight text-primary">
-            Wear The Movement
-          </h1>
-          <p className="mt-4 max-w-2xl text-lg md:text-xl text-neutral-200">
-            Engineered for every leap, sprint, and stretch. Our gear is built to amplify your power.
-          </p> */}
           <Button asChild size="lg" className="mt-8 bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-lg">
             <Link href="/shop">
               Shop Now <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
           </Button>
+        </div>
+      </section>
+
+      {/* Categories Section */}
+      <section className="py-16 bg-background">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-headline font-bold text-center mb-4">
+            Shop By Category
+          </h2>
+          <p className="text-center text-muted-foreground mb-12 max-w-2xl mx-auto">
+            Explore our curated collections designed for every aspect of your fitness journey
+          </p>
+          
+          <div className="relative">
+            <div className="flex overflow-x-auto pb-6 hide-scrollbar gap-4">
+              {categories.map((category) => (
+                <Link 
+                  key={category.id}
+                  href={`/shop?category=${category.slug}`}
+                  className="flex-shrink-0 w-80 group"
+                >
+                  <div className="relative h-64 rounded-xl overflow-hidden shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:scale-105">
+                    <Image
+                      src={category.image}
+                      alt={category.name}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                      <h3 className="text-xl font-headline font-bold mb-2">
+                        {category.name}
+                      </h3>
+                      {/* <p className="text-sm text-gray-200 mb-3">
+                        {category.description}
+                      </p> */}
+                      <div className="flex justify-between items-center">
+                        <span className="text-sm bg-primary px-3 py-1 rounded-full">
+                          {category.productCount} products
+                        </span>
+                        <ArrowRight className="h-5 w-5 transform group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
 
@@ -246,6 +333,16 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      <style jsx>{`
+        .hide-scrollbar {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </div>
   );
 }

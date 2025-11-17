@@ -57,6 +57,7 @@ export interface ICategory extends Document {
   name: string;
   slug: string;
   description?: string;
+  categoryImage: string;
   image?: string;
   parentCategory?: Types.ObjectId;
   isActive: boolean;
