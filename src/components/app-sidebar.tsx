@@ -42,7 +42,7 @@ import {
 const data = {
   user: {
     name: "Ciwaviv Admin",
-    email: "admin@ciwaviv.com",
+    email: "info@ciwaviv.com",
     avatar: "/avatars/shadcn.jpg",
   },
   navMain: [

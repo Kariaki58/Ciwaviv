@@ -170,7 +170,7 @@ export default function ProductInventoryPage() {
   };
 
   const handleAddProductRedirect = () => {
-    router.push("/admindashboard/upload-products");
+    router.push("/admindashboard/product-upload");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {

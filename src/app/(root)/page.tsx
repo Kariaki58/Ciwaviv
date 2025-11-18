@@ -24,49 +24,35 @@ interface Product {
   sold?: number;
 }
 
-// Category data that can be converted to API later
-const categories = [
-  {
-    id: '1',
-    name: 'Gym Wears',
-    slug: 'gym-wears',
-    image: '/fithub_1.jpg',
-    description: 'Performance-focused apparel for your workouts',
-    productCount: 24
-  },
-  {
-    id: '2',
-    name: 'Fithub Clothes',
-    slug: 'fithub-clothes',
-    image: '/fithub_12.jpg',
-    description: 'Signature collection for everyday athletes',
-    productCount: 18
-  },
-  {
-    id: '3',
-    name: 'Dumbbells',
-    slug: 'dumbbells',
-    image: '/gemini_5.png',
-    description: 'Premium weights for strength training',
-    productCount: 12
-  },
-  {
-    id: '4',
-    name: 'Training Gear',
-    slug: 'training-gear',
-    image: '/gemini_7.png',
-    description: 'Essential equipment for complete workouts',
-    productCount: 15
-  },
-  {
-    id: '5',
-    name: 'Accessories',
-    slug: 'accessories',
-    image: '/gemini_8.png',
-    description: 'Complete your fitness journey',
-    productCount: 8
+interface Category {
+  _id: string;
+  name: string;
+  slug: string;
+  description: string;
+  categoryImage: string;
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// Fetch categories from API
+async function getCategories(): Promise<Category[]> {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/categories`, {
+      next: { revalidate: 3600 } // Revalidate every hour
+    });
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch categories');
+    }
+    
+    const data = await response.json();
+    return data.categories || [];
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    return [];
   }
-];
+}
 
 async function getFeaturedProducts(): Promise<Product[]> {
   try {
@@ -105,10 +91,45 @@ async function getBestSellers(): Promise<Product[]> {
 }
 
 export default async function Home() {
-  const [featuredProducts, bestSellers] = await Promise.all([
+  const socialMediaLinks = {
+    facebook: 'https://facebook.com/fithubbyciwaviv',
+    twitter: 'https://x.com/fithubbyciwaviv',
+    instagram: 'https://instagram.com/fithubbyciwaviv',
+    linkedin: 'https://www.linkedin.com/company/ciwavivltd'
+  };
+  const [categories, featuredProducts, bestSellers] = await Promise.all([
+    getCategories(),
     getFeaturedProducts(),
     getBestSellers()
   ]);
+
+  // Filter only active categories and add fallback images
+  const activeCategories = categories
+    .filter(category => category.isActive)
+    .map(category => ({
+      id: category._id,
+      name: category.name,
+      slug: category.slug,
+      description: category.description,
+      image: category.categoryImage || getFallbackImage(category.slug),
+      productCount: 0 // You might want to add product count to your category model later
+    }));
+
+  // Fallback images based on category slug
+  function getFallbackImage(slug: string): string {
+    const fallbackImages: { [key: string]: string } = {
+      'gym-wears': '/fithub_1.jpg',
+      'fithub-clothes': '/fithub_12.jpg',
+      'dumbbells': '/gemini_5.png',
+      'training-gear': '/gemini_7.png',
+      'accessories': '/gemini_8.png',
+      'men': '/fithub_1.jpg',
+      'women': '/fithub_12.jpg',
+      'equipment': '/gemini_5.png'
+    };
+    
+    return fallbackImages[slug] || '/fithub_1.jpg';
+  }
 
   return (
     <div className="flex flex-col">
@@ -145,7 +166,7 @@ export default async function Home() {
           </Button>
         </div>
       </section>
-
+      
       {/* Categories Section */}
       <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
@@ -156,41 +177,50 @@ export default async function Home() {
             Explore our curated collections designed for every aspect of your fitness journey
           </p>
           
-          <div className="relative">
-            <div className="flex overflow-x-auto pb-6 hide-scrollbar gap-4">
-              {categories.map((category) => (
-                <Link 
-                  key={category.id}
-                  href={`/shop?category=${category.slug}`}
-                  className="flex-shrink-0 w-80 group"
-                >
-                  <div className="relative h-64 rounded-xl overflow-hidden shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:scale-105">
-                    <Image
-                      src={category.image}
-                      alt={category.name}
-                      fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                    <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                      <h3 className="text-xl font-headline font-bold mb-2">
-                        {category.name}
-                      </h3>
-                      {/* <p className="text-sm text-gray-200 mb-3">
-                        {category.description}
-                      </p> */}
-                      <div className="flex justify-between items-center">
-                        <span className="text-sm bg-primary px-3 py-1 rounded-full">
-                          {category.productCount} products
-                        </span>
-                        <ArrowRight className="h-5 w-5 transform group-hover:translate-x-1 transition-transform" />
+          {activeCategories.length > 0 ? (
+            <div className="relative">
+              <div className="flex overflow-x-auto pb-6 hide-scrollbar gap-4">
+                {activeCategories.map((category) => (
+                  <Link 
+                    key={category.id}
+                    href={`/shop?category=${category.slug}`}
+                    className="flex-shrink-0 w-80 group"
+                  >
+                    <div className="relative h-64 rounded-xl overflow-hidden shadow-lg transition-all duration-300 group-hover:shadow-xl group-hover:scale-105">
+                      <Image
+                        src={category.image}
+                        alt={category.name}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                      <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                        <h3 className="text-xl font-headline font-bold mb-2">
+                          {category.name}
+                        </h3>
+                        {category.description && (
+                          <p className="text-sm text-gray-200 mb-3">
+                            {category.description}
+                          </p>
+                        )}
+                        <div className="flex justify-between items-center">
+                          {/* You can add product count here when you implement it */}
+                          <span className="text-sm bg-primary px-3 py-1 rounded-full">
+                            Shop Now
+                          </span>
+                          <ArrowRight className="h-5 w-5 transform group-hover:translate-x-1 transition-transform" />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
-              ))}
+                  </Link>
+                ))}
+              </div>
             </div>
-          </div>
+          ) : (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground">No categories available at the moment.</p>
+            </div>
+          )}
         </div>
       </section>
 
