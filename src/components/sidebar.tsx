@@ -14,12 +14,12 @@ import {
 } from 'lucide-react';
 
 const navigation = [
-  { name: 'Dashboard', href: '/admin', icon: Home, current: true },
-  { name: 'customer', href: '/admin/customers', icon: Users, current: false },
-  { name: 'Upload', href: '/admin/product-upload', icon: CloudUpload, current: false },
-  { name: 'Products', href: '/admin/product', icon: PackageSearch, current: false },
-  { name: 'Orders', href: '/admin/orders', icon: Package, current: false },
-  { name: 'Settings', href: '/admin/settings', icon: Settings, current: false },
+  { name: 'Dashboard', href: '/admindashboard', icon: Home, current: true },
+  { name: 'customer', href: '/admindashboard/customers', icon: Users, current: false },
+  { name: 'Upload', href: '/admindashboard/product-upload', icon: CloudUpload, current: false },
+  { name: 'Products', href: '/admindashboard/product', icon: PackageSearch, current: false },
+  { name: 'Orders', href: '/admindashboard/orders', icon: Package, current: false },
+  { name: 'Settings', href: '/admindashboard/settings', icon: Settings, current: false },
 ];
 
 export default function Sidebar() {

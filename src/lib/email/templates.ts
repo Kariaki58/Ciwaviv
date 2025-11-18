@@ -131,7 +131,7 @@ export function adminNewOrderEmail(order: any) {
             <p style="${paragraph}"><strong>Total:</strong> ₦${order.totalAmount.toLocaleString()}</p>
             <p style="${paragraph}"><strong>Shipping:</strong> ₦${order.shippingFee?.toLocaleString() || 0}</p>
 
-            <a href="${process.env.NEXT_PUBLIC_API_URL}/admin/orders/${order.orderNumber}" style="${button}">
+            <a href="${process.env.NEXT_PUBLIC_API_URL}/admindashboard/orders/${order.orderNumber}" style="${button}">
               View in Dashboard
             </a>
           </div>
