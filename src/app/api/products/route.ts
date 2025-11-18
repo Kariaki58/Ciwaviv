@@ -11,6 +11,7 @@ import { DeleteFile } from "@/lib/cloudinary/cloud-fun";
 
 
 
+// app/api/products/route.ts - Fix the GET function
 export async function GET(req: NextRequest) {
   try {
     await connectToDatabase();
@@ -34,25 +35,17 @@ export async function GET(req: NextRequest) {
     }
 
     if (category) {
-      filter.category = category._id;
+      // FIX: Use category directly, not category._id
+      filter.category = new Types.ObjectId(category);
     }
 
-    // 🟢 Fetch products without populate
+    // 🟢 Fetch products with populate for better category handling
     const products = await Product.find(filter)
+      .populate('category', 'name _id')
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(limit)
       .lean();
-
-    // 🟢 Manual populate categories
-    const categoryIds = products.map((p) => p.category).filter(Boolean);
-    const categories = await Category.find({ _id: { $in: categoryIds } })
-      .select("name _id")
-      .lean();
-
-    const categoryMap = new Map(
-      categories.map((cat) => [cat._id.toString(), cat.name])
-    );
 
     // 🧮 Get total count for pagination
     const total = await Product.countDocuments(filter);
@@ -64,7 +57,8 @@ export async function GET(req: NextRequest) {
       name: product.name,
       description: product.description,
       price: product.price,
-      category: categoryMap.get(product.category?.toString()) || "Uncategorized",
+      category: product.category?.name || "Uncategorized",
+      categoryId: product.category?._id || null, // Add categoryId for filtering
       inventory: product.inventory,
       sizes: product.sizes || [],
       colors: product.colors || [],

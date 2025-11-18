@@ -1,10 +1,19 @@
 
 import type { Metadata } from 'next';
 import { Inter, Poppins } from 'next/font/google';
-import '../globals.css'
-import { Toaster } from '@/components/ui/toaster';
-import Header from '@/components/layout/header';
-import Footer from '@/components/layout/footer';
+import "./globals.css"
+import { cn } from '@/lib/utils';
+
+const fontBody = Inter({
+  subsets: ['latin'],
+  variable: '--font-body',
+});
+
+const fontHeadline = Poppins({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+  variable: '--font-headline',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://Fithub.com'),
@@ -34,13 +43,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main>
-      <div className="flex min-h-screen flex-col">
-        <Header />
-        <main className="flex-grow">{children}</main>
-        <Footer />
-      </div>
-      <Toaster />
-    </main>
+    <html lang="en" suppressHydrationWarning>
+      <body className={cn(
+        "font-body antialiased",
+        fontBody.variable,
+        fontHeadline.variable
+      )}>
+        { children }
+      </body>
+    </html>
   );
 }

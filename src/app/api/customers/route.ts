@@ -5,58 +5,111 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { User } from "../../../../models/user";
 
-// GET - Fetch customers (with optional email filter)
+
 export async function GET(req: NextRequest) {
   try {
-    const { searchParams } = new URL(req.url);
-    const email = searchParams.get('email');
-
     const session = await getServerSession(authOptions);
-    
-    if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
 
-    const userId = session?.user?.id;
-    if (!userId) {
+    if (!session) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     await connectToDatabase();
 
-    const user = await User.findById(userId);
-    if (!user || user.role !== 'admin') {
+    // Check if user is admin
+    const user = await User.findById(session.user.id);
+    if (!user || user.role !== "admin") {
       return NextResponse.json({ error: "Forbidden" }, { status: 403 });
     }
 
+    const { searchParams } = new URL(req.url);
+    const page = parseInt(searchParams.get("page") || "1");
+    const limit = parseInt(searchParams.get("limit") || "10");
+    const search = searchParams.get("search") || "";
+
+    const skip = (page - 1) * limit;
+
+    // Build filter for newsletter subscribers
     const filter: any = {};
-    if (email) {
-      filter.email = { $regex: email, $options: 'i' };
+    if (search) {
+      filter.email = { $regex: search, $options: "i" };
     }
 
+    // Fetch newsletter subscribers
     const customers = await Customer.find(filter)
       .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(limit)
       .lean();
+
+    const total = await Customer.countDocuments(filter);
+    const totalPages = Math.ceil(total / limit);
+
+    const formattedCustomers = customers.map((customer) => ({
+      id: customer._id.toString(),
+      email: customer.email,
+      createdAt: customer.createdAt,
+      updatedAt: customer.updatedAt,
+    }));
 
     return NextResponse.json({
       success: true,
-      customers: customers.map(customer => ({
-        _id: customer._id,
-        email: customer.email,
-        createdAt: customer.createdAt
-      }))
+      customers: formattedCustomers,
+      pagination: {
+        currentPage: page,
+        totalPages,
+        totalCustomers: total,
+        hasNext: page < totalPages,
+        hasPrev: page > 1,
+      },
     });
-
   } catch (error: any) {
-    console.error('Error fetching customers:', error);
+    console.error("Customers fetch error:", error);
     return NextResponse.json(
-      { error: error.message },
+      { error: "Error fetching customers: " + error.message },
       { status: 500 }
     );
   }
 }
 
-// POST - Add new newsletter subscriber
+export async function DELETE(req: NextRequest) {
+  try {
+    const session = await getServerSession(authOptions);
+
+    if (!session) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    await connectToDatabase();
+
+    // Check if user is admin
+    const user = await User.findById(session.user.id);
+    if (!user || user.role !== "admin") {
+      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
+    }
+
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+
+    if (!id) {
+      return NextResponse.json({ error: "Customer ID is required" }, { status: 400 });
+    }
+
+    await Customer.findByIdAndDelete(id);
+
+    return NextResponse.json({
+      success: true,
+      message: "Customer deleted successfully",
+    });
+  } catch (error: any) {
+    console.error("Customer deletion error:", error);
+    return NextResponse.json(
+      { error: "Error deleting customer: " + error.message },
+      { status: 500 }
+    );
+  }
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();

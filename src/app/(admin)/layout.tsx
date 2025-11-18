@@ -6,6 +6,7 @@ import {
   SidebarTrigger,
 } from "@/components/ui/sidebar"
 import '../globals.css'
+import SessionContext from '@/components/ReactSessioncontext';
 
 import { cn } from '@/lib/utils';
 
@@ -23,13 +24,8 @@ import Sidebar from "@/components/sidebar";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode  }) {
     return (
-        <html lang="en" suppressHydrationWarning>
-              <body className={cn(
-                "font-body antialiased bg-gray-800",
-                fontBody.variable,
-                fontHeadline.variable
-            )}>
-              <SidebarProvider>
+        <div>
+          <SidebarProvider>
                 <AppSidebar />
                 <SidebarInset>
                   <header className="flex h-16 shrink-0 items-center gap-2 transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12">
@@ -37,10 +33,11 @@ export default function DashboardLayout({ children }: { children: React.ReactNod
                       <SidebarTrigger className="-ml-1" />
                     </div>
                   </header>
-                  {children}
+                  <SessionContext>
+                    {children}
+                  </SessionContext>
                 </SidebarInset>
               </SidebarProvider>
-            </body>
-        </html>
+        </div>
     )
 }

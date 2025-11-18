@@ -1,92 +1,93 @@
-import { NextRequest, NextResponse } from "next/server";
-import connectToDatabase from "../../../../config/database";
-import { Category } from "../../../../models/category";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/auth";
-import { User } from "../../../../models/user";
+import { NextRequest, NextResponse } from 'next/server';
+import { getServerSession } from 'next-auth';
+import connectToDatabase from '../../../../config/database';
+import { Category } from '../../../../models/category';
+import { authOptions } from '@/lib/auth';
 
-export async function GET(req: NextRequest) {
+// GET all categories
+export async function GET() {
   try {
     await connectToDatabase();
     
-    const categories = await Category.find({ isActive: true }).select('name _id');
+    const categories = await Category.find({}).sort({ createdAt: -1 });
     
+    console.log('Fetched categories:', categories);
     return NextResponse.json({ 
-      success: true, 
-      categories 
+      success: true,
+
+      categories: categories.map(cat => ({
+        _id: cat._id.toString(),
+        name: cat.name,
+        slug: cat.slug,
+        description: cat.description,
+        categoryImage: cat.categoryImage,
+        isActive: cat.isActive,
+        createdAt: cat.createdAt.toISOString(),
+        updatedAt: cat.updatedAt.toISOString()
+      }))
     });
-    
-  } catch (error: any) {
-    console.error("Categories fetch error:", error);
-    return NextResponse.json({ 
-      error: "Error fetching categories" 
-    }, { status: 500 });
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    return NextResponse.json(
+      { error: 'Failed to fetch categories' },
+      { status: 500 }
+    );
   }
 }
 
-export async function POST(req: NextRequest) {
+// POST new category
+export async function POST(request: NextRequest) {
   try {
-    
-    const { name, slug } = await req.json();
-
     const session = await getServerSession(authOptions);
-    
     if (!session) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const userId = session?.user?.id;
-    if (!userId) {
-      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-    }
-    
-    if (!name) {
-      return NextResponse.json({ error: "Category name is required" }, { status: 400 });
-    }
     await connectToDatabase();
-
     
-    const user = await User.findById(userId);
-    if (!user || user.role !== 'admin') {
-      return NextResponse.json({ error: "Forbidden" }, { status: 403 });
-    }
-
-    const categorySlug = slug || name.toLowerCase().replace(/[^a-z0-9]/g, '-');
+    const body = await request.json();
+    const { name, slug, description, categoryImage, isActive } = body;
 
     // Check if category already exists
-    const existingCategory = await Category.findOne({ 
-      $or: [
-        { name: { $regex: new RegExp(`^${name}$`, 'i') } }, 
-        { slug: categorySlug }
-      ] 
+    const existingCategory = await Category.findOne({
+      $or: [{ name }, { slug }]
     });
 
     if (existingCategory) {
-      return NextResponse.json({ 
-        error: "Category already exists",
-        category: existingCategory 
-      }, { status: 400 });
+      return NextResponse.json(
+        { error: 'Category with this name or slug already exists' },
+        { status: 400 }
+      );
     }
 
     const category = new Category({
       name,
-      slug: categorySlug,
-      isActive: true
+      slug,
+      description,
+      categoryImage,
+      isActive: isActive !== undefined ? isActive : true
     });
 
     await category.save();
 
     return NextResponse.json({ 
-      success: true, 
-      _id: category._id,
-      name: category.name,
-      slug: category.slug
+      message: 'Category created successfully',
+      category: {
+        _id: category._id.toString(),
+        name: category.name,
+        slug: category.slug,
+        description: category.description,
+        categoryImage: category.categoryImage,
+        isActive: category.isActive,
+        createdAt: category.createdAt.toISOString(),
+        updatedAt: category.updatedAt.toISOString()
+      }
     });
-    
-  } catch (error: any) {
-    console.error("Category creation error:", error);
-    return NextResponse.json({ 
-      error: "Error creating category: " + error.message 
-    }, { status: 500 });
+  } catch (error) {
+    console.error('Error creating category:', error);
+    return NextResponse.json(
+      { error: 'Failed to create category' },
+      { status: 500 }
+    );
   }
 }

@@ -12,6 +12,7 @@ import {
   FileIcon,
   FileTextIcon,
   FolderIcon,
+  FoldersIcon,
   HelpCircleIcon,
   LayoutDashboardIcon,
   ListIcon,
@@ -49,6 +50,11 @@ const data = {
       title: "Dashboard",
       url: "/admindashboard",
       icon: LayoutDashboardIcon,
+    },
+    {
+      title: "Category",
+      url: "/admindashboard/category",
+      icon: FoldersIcon,
     },
     {
       title: "Customer",
