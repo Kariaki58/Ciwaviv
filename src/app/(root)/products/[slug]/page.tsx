@@ -45,25 +45,25 @@ async function getProduct(slug: string): Promise<Product | null> {
   }
 }
 
-async function getRelatedProducts(category: string, excludeId: string): Promise<Product[]> {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_APP_URL}/api/products?category=${category}&limit=4`,
-      { next: { revalidate: 3600 } }
-    );
+// async function getRelatedProducts(category: string, excludeId: string): Promise<Product[]> {
+//   try {
+//     const response = await fetch(
+//       `${process.env.NEXT_PUBLIC_APP_URL}/api/products?category=${category}&limit=4`,
+//       { next: { revalidate: 3600 } }
+//     );
     
-    if (!response.ok) {
-      throw new Error('Failed to fetch related products');
-    }
+//     if (!response.ok) {
+//       throw new Error('Failed to fetch related products');
+//     }
     
-    const data = await response.json();
-    // Filter out the current product
-    return data.products?.filter((product: Product) => product.id !== excludeId) || [];
-  } catch (error) {
-    console.error('Error fetching related products:', error);
-    return [];
-  }
-}
+//     const data = await response.json();
+//     // Filter out the current product
+//     return data.products?.filter((product: Product) => product.id !== excludeId) || [];
+//   } catch (error) {
+//     console.error('Error fetching related products:', error);
+//     return [];
+//   }
+// }
 
 type Props = {
   params: { slug: string };
@@ -109,7 +109,7 @@ export default async function ProductDetailPage({ params }: Props) {
     notFound();
   }
   
-  const relatedProducts = await getRelatedProducts(product.category, product.id);
+  // const relatedProducts = await getRelatedProducts(product.category, product.id);
 
   return (
     <div className="bg-background">
@@ -155,7 +155,7 @@ export default async function ProductDetailPage({ params }: Props) {
           </div>
         </div>
       </div>
-      <RelatedProducts products={relatedProducts} />
+      {/* <RelatedProducts products={relatedProducts} /> */}
     </div>
   );
 }

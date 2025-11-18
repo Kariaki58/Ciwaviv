@@ -203,7 +203,7 @@ export default async function Home() {
                             {category.description}
                           </p>
                         )}
-                        <div className="flex justify-between items-center">
+                        <div className="flex justify-between items-center text-black">
                           {/* You can add product count here when you implement it */}
                           <span className="text-sm bg-primary px-3 py-1 rounded-full">
                             Shop Now
@@ -302,7 +302,7 @@ export default async function Home() {
                 Every piece in our collection is crafted with precision, using advanced materials that offer superior breathability, flexibility, and durability. Stop settling for less. Elevate your performance and conquer your goals with Fithub.
               </p>
               <Button asChild size="lg" variant="outline">
-                <Link href="/shop?category=men">Shop Men's</Link>
+                <Link href="/shop?category=men">Fithub equipment</Link>
               </Button>
             </div>
           </div>
@@ -322,7 +322,7 @@ export default async function Home() {
                 We believe high-performance gear should never compromise on style. Our modern, energetic aesthetic ensures you look sharp, whether you're hitting a new personal best or navigating your day.
               </p>
               <Button asChild size="lg" variant="outline">
-                <Link href="/shop?category=women">Shop Women's</Link>
+                <Link href="/shop?category=women">Sport Wears</Link>
               </Button>
             </div>
             <div className="relative h-[500px] w-full rounded-lg overflow-hidden shadow-lg md:order-1">

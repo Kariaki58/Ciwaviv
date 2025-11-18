@@ -16,12 +16,6 @@ export default function MobileNav({ navLinks }: MobileNavProps) {
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
-      <SheetTrigger asChild>
-        <Button variant="ghost" size="icon" className="md:hidden">
-          <Menu />
-          <span className="sr-only">Open menu</span>
-        </Button>
-      </SheetTrigger>
       <SheetContent side="left">
         <div className="p-4">
           <Link href="/" className="mb-8 block" onClick={() => setIsOpen(false)}>
@@ -41,6 +35,12 @@ export default function MobileNav({ navLinks }: MobileNavProps) {
           </nav>
         </div>
       </SheetContent>
+      {/* <SheetTrigger asChild>
+        <Button variant="ghost" size="icon" className="md:hidden">
+          <Menu />
+          <span className="sr-only">Open menu</span>
+        </Button>
+      </SheetTrigger> */}
     </Sheet>
   );
 }

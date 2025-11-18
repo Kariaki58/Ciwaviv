@@ -58,13 +58,15 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-card text-card-foreground">
+    <footer className="bg-gray-100 shadow-2xl shadow-slate-900/40 text-card-foreground">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand and Newsletter */}
           <div className="md:col-span-2">
             <div className="mb-6">
-              <Logo />
+              <Link href="/" aria-label="Back to homepage">
+                <Logo />
+              </Link>
             </div>
             <p className="text-muted-foreground mb-4 max-w-sm">
               Sign up for our newsletter to get the latest news, drops, and deals from our Nigerian brand.
