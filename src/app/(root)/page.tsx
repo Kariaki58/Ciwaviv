@@ -137,7 +137,7 @@ export default async function Home() {
       <section className="relative h-[70vh] md:h-[90vh] w-full">
         <div className="hidden md:block">
           <Image
-            src="/fithub_8.jpg"
+            src="/banner.jpg"
             alt="Athlete in motion"
             fill
             className="object-cover"
@@ -148,7 +148,7 @@ export default async function Home() {
         {/* mobile banner */}
         <div className="block md:hidden">
           <Image
-            src="/fithub_8.jpg"
+            src="/banner.jpg"
             alt="Athlete in motion"
             fill
             className="object-cover"
