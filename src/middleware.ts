@@ -9,9 +9,10 @@ export async function middleware(req: NextRequest) {
 
   console.log({ pathname })
   // Only protect /admin routes
-  if (!pathname.startsWith("/admin")) {
+  if (!pathname.startsWith("/admindashboard")) {
     return NextResponse.next();
   }
+  
 
   // Retrieve the NextAuth token (from cookie/JWT)
   const token = await getToken({

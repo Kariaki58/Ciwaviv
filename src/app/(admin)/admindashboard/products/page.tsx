@@ -91,6 +91,12 @@ export default function ProductInventoryPage() {
     images: [] as string[],
   });
 
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/auth/login");
+    }
+  }, [status, router]);
+
   // Debounce search input
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -119,12 +125,6 @@ export default function ProductInventoryPage() {
       revalidateOnFocus: false,
     }
   );
-
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/auth/signin");
-    }
-  }, [status, router]);
 
   const showSnackbar = (message: string, type: "success" | "error") => {
     setSnackbar({ open: true, message, type });

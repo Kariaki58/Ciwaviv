@@ -11,6 +11,8 @@ export async function PUT(
 ) {
   try {
     const session = await getServerSession(authOptions);
+    const id = (await params).id
+
     if (!session) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
@@ -22,7 +24,7 @@ export async function PUT(
 
     // Check if another category exists with the same name or slug
     const existingCategory = await Category.findOne({
-      _id: { $ne: params.id },
+      _id: { $ne: id },
       $or: [{ name }, { slug }]
     });
 
@@ -34,7 +36,7 @@ export async function PUT(
     }
 
     const category = await Category.findByIdAndUpdate(
-      params.id,
+      id,
       {
         ...(name && { name }),
         ...(slug && { slug }),
@@ -87,7 +89,8 @@ export async function DELETE(
 
     await connectToDatabase();
     
-    const category = await Category.findByIdAndDelete(params.id);
+    const id = (await params).id
+    const category = await Category.findByIdAndDelete(id);
 
     if (!category) {
       return NextResponse.json(

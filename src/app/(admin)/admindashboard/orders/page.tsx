@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import useSWR from "swr";
 
+
 // Types
 /**
  * @typedef {Object} OrderItem
@@ -177,7 +178,7 @@ export default function OrdersPage() {
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.push("/auth/signin");
+      router.push("/auth/login");
     }
   }, [status, router]);
 

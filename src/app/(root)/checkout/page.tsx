@@ -400,7 +400,7 @@ export default function CheckoutPage() {
                     ) : shippingFee > 0 ? (
                       formatPrice(shippingFee)
                     ) : watchCity ? (
-                      'Free'
+                      'calculated in next step'
                     ) : (
                       'Select location'
                     )}

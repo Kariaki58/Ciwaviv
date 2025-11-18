@@ -27,6 +27,9 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { X, Upload, Plus, Trash2, Loader2 } from "lucide-react";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
 
 // Updated schema with only size and color variants
 const productFormSchema = z.object({
@@ -57,6 +60,8 @@ export default function ProductUploadPage() {
   const [loading, setLoading] = useState(true);
   const [newVariantType, setNewVariantType] = useState<"size" | "color">("size");
   const [newVariantValue, setNewVariantValue] = useState("");
+  const { data: session, status } = useSession();
+  const router = useRouter();
 
   const form = useForm<ProductFormValues>({
     resolver: zodResolver(productFormSchema),
@@ -77,6 +82,12 @@ export default function ProductUploadPage() {
     control: form.control,
     name: "variants",
   });
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/auth/login");
+    }
+  }, [status, router]);
 
   // Fetch categories dynamically
   useEffect(() => {

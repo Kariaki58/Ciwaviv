@@ -10,6 +10,8 @@ import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import { Plus, Edit, Trash2, Image as ImageIcon, Loader2, Upload } from "lucide-react";
 import Image from "next/image";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 interface Category {
   _id: string;
@@ -29,6 +31,8 @@ export default function CategoryDashboardPage() {
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const [imagePreview, setImagePreview] = useState<string>("");
+  const { data: session, status } = useSession();
+  const router = useRouter();
   
   // Form state
   const [formData, setFormData] = useState({
@@ -38,6 +42,12 @@ export default function CategoryDashboardPage() {
     categoryImage: "",
     isActive: true
   });
+
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/auth/login");
+    }
+  }, [status, router]);
 
   // Fetch categories
   const fetchCategories = async () => {
@@ -219,7 +229,7 @@ export default function CategoryDashboardPage() {
   }
 
   return (
-    <div className="container mx-auto py-6 space-y-6">
+    <div className="container mx-auto p-6 space-y-6">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold">Categories</h1>

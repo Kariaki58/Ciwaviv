@@ -150,7 +150,7 @@ export default function CustomersPage() {
 
   useEffect(() => {
     if (status === "unauthenticated") {
-      router.push("/auth/signin");
+      router.push("/auth/login");
     }
   }, [status, router]);
 
