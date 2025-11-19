@@ -121,24 +121,24 @@ export default function ContactPage() {
               <div className="space-y-4">
                 <Link target='_blank' href="https://instagram.com/fithubbyciwaviv" className="flex items-center group">
                   <Instagram className="h-6 w-6 mr-3 text-muted-foreground group-hover:text-primary" />
-                  <span className="group-hover:text-primary">@Fithub_active</span>
+                  <span className="group-hover:text-primary">@fithubbyciwaviv</span>
                 </Link>
                 <Link target='_blank' href="https://x.com/fithubbyciwaviv" className="flex items-center group">
                   <Twitter className="h-6 w-6 mr-3 text-muted-foreground group-hover:text-primary" />
-                  <span className="group-hover:text-primary">@Fithub</span>
+                  <span className="group-hover:text-primary">@fithubbyciwaviv</span>
                 </Link>
                 <Link target='_blank' href="https://www.linkedin.com/company/ciwavivltd" className="flex items-center group">
                   <Linkedin className="h-6 w-6 mr-3 text-muted-foreground group-hover:text-primary" />
-                  <span className="group-hover:text-primary">TikTok</span>
+                  <span className="group-hover:text-primary">fithubbyciwaviv</span>
                 </Link>
               </div>
             </div>
             <div className="mt-8 pt-8 border-t">
               <h3 className="text-xl font-headline font-bold mb-4">Our Office</h3>
               <p className="text-muted-foreground">
-                123 Active Way<br />
-                Lagos, 100212<br />
-                Nigeria
+                Benin Asaba Express Way<br />
+                By Koka Junction<br />
+                Asaba, Delta State
               </p>
             </div>
           </div>
