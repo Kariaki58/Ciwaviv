@@ -122,15 +122,35 @@ export default async function Home() {
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-        <div className="relative z-10 flex flex-col items-center justify-end h-full text-center text-white pb-20 px-4">
-          <Button asChild size="lg" className="mt-8 bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-lg">
-            <Link href="/shop">
-              Shop Now <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </Button>
+
+        {/* Dark overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
+
+        {/* TEXT + BUTTON */}
+        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-cyan-100 px-4">
+          <div className="bg-white/1 backdrop-blur-[2px] p-4 rounded-xl">
+            <h1 className="text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg">
+              Gear Up in Style
+            </h1>
+
+            <p className="text-lg md:text-2xl font-bold text-cyan-100 max-w-2xl mb-8 drop-shadow-md">
+              Shop premium sportswear and active gear designed for comfort, performance, and style.
+            </p>
+
+            <Button
+              asChild
+              size="lg"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-lg"
+            >
+              <Link href="/shop">
+                Shop Now <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
+
+
 
       {/* -----------------------
           CATEGORIES
