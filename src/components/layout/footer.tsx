@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import Logo from '@/components/logo';
-import { Instagram, Twitter, Facebook } from 'lucide-react';
+import { Instagram, Twitter, Facebook, Linkedin } from 'lucide-react';
 import { useState } from 'react';
 import { useToast } from '@/hooks/use-toast';
 
@@ -12,6 +12,14 @@ export default function Footer() {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+
+
+  const socialMediaLinks = {
+    facebook: 'https://facebook.com/fithubbyciwaviv',
+    twitter: 'https://x.com/fithubbyciwaviv',
+    instagram: 'https://instagram.com/fithubbyciwaviv',
+    linkedin: 'https://www.linkedin.com/company/ciwavivltd'
+  }
 
   const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -113,23 +121,48 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t flex flex-col md:flex-row justify-between items-center">
-          <p className="text-muted-foreground text-sm mb-4 md:mb-0">
-            &copy; {new Date().getFullYear()} Fithub Nigeria. All Rights Reserved.
-          </p>
-          <div className="flex space-x-4">
-            <Link href="#" className="text-muted-foreground hover:text-primary">
-              <Instagram />
-              <span className="sr-only">Instagram</span>
-            </Link>
-            <Link href="#" className="text-muted-foreground hover:text-primary">
-              <Twitter />
-              <span className="sr-only">Twitter</span>
-            </Link>
-            <Link href="#" className="text-muted-foreground hover:text-primary">
-              <Facebook />
-              <span className="sr-only">Facebook</span>
-            </Link>
+        <div>
+          <h4 className="font-bold mb-3 sm:mb-4 text-sm sm:text-base mt-5">Follow Us</h4>
+          <div className="flex space-x-3 sm:space-x-4">
+            {/* Facebook */}
+            <a
+              href={socialMediaLinks.facebook}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-600 rounded-full flex items-center justify-center hover:bg-[#265287] hover:text-gray-900 transition-colors cursor-pointer"
+            >
+              <Facebook className="text-white w-4 h-4 sm:w-5 sm:h-5" />
+            </a>
+
+            {/* Twitter/X */}
+            <a
+              href={socialMediaLinks.twitter}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-600 rounded-full flex items-center justify-center hover:bg-[#265287] hover:text-gray-900 transition-colors cursor-pointer"
+            >
+              <Twitter className="text-white w-4 h-4 sm:w-5 sm:h-5" />
+            </a>
+
+            {/* Instagram */}
+            <a
+              href={socialMediaLinks.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-600 rounded-full flex items-center justify-center hover:bg-[#265287] hover:text-gray-900 transition-colors cursor-pointer"
+            >
+              <Instagram className="text-white w-4 h-4 sm:w-5 sm:h-5" />
+            </a>
+
+            {/* LinkedIn */}
+            <a
+              href={socialMediaLinks.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-8 h-8 sm:w-10 sm:h-10 bg-gray-600 rounded-full flex items-center justify-center hover:bg-[#265287] hover:text-gray-900 transition-colors cursor-pointer"
+            >
+              <Linkedin className="text-white w-4 h-4 sm:w-5 sm:h-5" />
+            </a>
           </div>
         </div>
       </div>
