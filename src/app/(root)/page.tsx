@@ -127,14 +127,14 @@ export default async function Home() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent" />
 
         {/* TEXT + BUTTON */}
-        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-cyan-100 px-4">
-          <div className="bg-white/1 backdrop-blur-[2px] p-4 rounded-xl">
-            <h1 className="text-4xl md:text-6xl font-extrabold mb-4 drop-shadow-lg">
-              Gear Up in Style
+        <div className="absolute inset-0 flex items-center justify-center px-4">
+          <div className="bg-white/10 backdrop-blur-[2px] p-8 rounded-xl max-w-3xl text-center">
+            <h1 className="text-4xl md:text-5xl text-cyan-100 font-extrabold mb-4 drop-shadow-lg">
+              Elevate Your Fitness & Wellness
             </h1>
 
-            <p className="text-lg md:text-2xl font-bold text-cyan-100 max-w-2xl mb-8 drop-shadow-md">
-              Shop premium sportswear and active gear designed for comfort, performance, and style.
+            <p className="text-lg md:text-xl font-semibold text-cyan-100 mt-2 mb-6 drop-shadow-md">
+              Premium sportswear, gym essentials, and physiotherapy gear — everything you need to train smarter and recover faster.
             </p>
 
             <Button
