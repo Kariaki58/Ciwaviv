@@ -206,7 +206,7 @@ export default function DashboardPage() {
               <CardTitle>Recent Orders</CardTitle>
               <CardDescription>Latest orders from your store</CardDescription>
             </div>
-            <Button variant="ghost" size="sm" onClick={() => router.push("/dashboard/orders")}>
+            <Button variant="ghost" size="sm" onClick={() => router.push("/admindashboard/orders")}>
               View All
               <ArrowUpRight className="w-4 h-4 ml-1" />
             </Button>
@@ -244,7 +244,7 @@ export default function DashboardPage() {
               <CardTitle>Top Products</CardTitle>
               <CardDescription>Best selling products</CardDescription>
             </div>
-            <Button variant="ghost" size="sm" onClick={() => router.push("/dashboard/inventory")}>
+            <Button variant="ghost" size="sm" onClick={() => router.push("/admindashboard/products")}>
               View All
               <ArrowUpRight className="w-4 h-4 ml-1" />
             </Button>

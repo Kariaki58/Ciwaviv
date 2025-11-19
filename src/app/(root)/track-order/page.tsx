@@ -25,12 +25,13 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Truck, Package, Clock, CheckCircle, HelpCircle, MapPin, Calendar, MessageSquare } from 'lucide-react';
 import Image from 'next/image';
 import { formatPrice } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 import { format } from 'date-fns';
+import { useSearchParams } from 'next/navigation';
 
 const trackOrderSchema = z.object({
   orderId: z.string().min(6, 'Order ID must be at least 6 characters.'),
@@ -237,7 +238,8 @@ export default function TrackOrderPage() {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
   const [dialogOpen, setDialogOpen] = useState(false);
-
+  const searchParams = useSearchParams();
+  const [autoTracking, setAutoTracking] = useState(false);
 
   const trackOrderForm = useForm<z.infer<typeof trackOrderSchema>>({
     resolver: zodResolver(trackOrderSchema),
@@ -253,6 +255,49 @@ export default function TrackOrderPage() {
     resolver: zodResolver(otpSchema),
     defaultValues: { otp: '' },
   });
+
+  // Auto-populate and track order when orderId is in URL
+  useEffect(() => {
+    const orderId = searchParams.get('orderId');
+    if (orderId) {
+      // Set the order ID in the form
+      trackOrderForm.setValue('orderId', orderId);
+      setAutoTracking(true);
+      
+      // Automatically submit the form to track the order
+      setTimeout(() => {
+        handleAutoTrackOrder(orderId);
+      }, 500);
+    }
+  }, [searchParams]);
+
+  const handleAutoTrackOrder = async (orderId: string) => {
+    setLoading(true);
+    try {
+      const response = await fetch(`/api/track-order?orderId=${orderId}`);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Order not found');
+      }
+
+      setFoundOrder(data.order);
+      toast({
+        title: 'Order Found',
+        description: `Tracking order ${data.order.orderNumber}`,
+      });
+    } catch (error: any) {
+      setFoundOrder(null);
+      toast({
+        variant: 'destructive',
+        title: 'Order Not Found',
+        description: error.message,
+      });
+    } finally {
+      setLoading(false);
+      setAutoTracking(false);
+    }
+  };
 
   async function onTrackOrderSubmit(values: z.infer<typeof trackOrderSchema>) {
     setLoading(true);
@@ -362,7 +407,6 @@ export default function TrackOrderPage() {
     }
   }
 
-
   const getStatusColor = (status: string) => {
     const colors = {
       pending: 'bg-yellow-100 text-yellow-800',
@@ -420,6 +464,16 @@ export default function TrackOrderPage() {
               </Button>
             </form>
           </Form>
+          
+          {/* Show loading state when auto-tracking */}
+          {autoTracking && loading && (
+            <div className="mt-3 p-3 bg-blue-50 rounded-md">
+              <div className="flex items-center gap-2 text-sm text-blue-700">
+                <Package className="h-4 w-4 animate-pulse" />
+                <span>Automatically tracking order: <strong>{searchParams.get('orderId')}</strong></span>
+              </div>
+            </div>
+          )}
         </CardContent>
       </Card>
 
@@ -471,14 +525,13 @@ export default function TrackOrderPage() {
                       </p>
                     </div>
                   </div>
-
-                  {foundOrder.trackingNumber && (
+                  {foundOrder.orderNumber && (
                     <div className="flex items-start gap-2 sm:gap-3">
                       <Package className="h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground mt-0.5 flex-shrink-0" />
                       <div className="min-w-0">
                         <h4 className="font-semibold text-sm sm:text-base">Tracking Number</h4>
-                        <p className="text-xs sm:text-sm font-mono text-primary mt-1 break-all">
-                          {foundOrder.trackingNumber}
+                        <p className="text-xs sm:text-sm font-mono text-gray-800 mt-1 break-all">
+                          {foundOrder.orderNumber}
                         </p>
                         {foundOrder.shippingProvider && (
                           <p className="text-xs sm:text-sm text-muted-foreground">

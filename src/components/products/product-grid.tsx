@@ -18,17 +18,14 @@ interface ProductGridProps {
     hasPrev: boolean;
     limit: number;
   };
-  initialFilters: {
-    categories: Array<{ id: string; name: string; value: string }>;
-    priceRange: { min: number; max: number };
-  };
+  availableCategories: Array<{ _id: string; name: string; slug: string; isActive: boolean }>;
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
 export default function ProductGrid({ 
   initialProducts, 
   initialPagination, 
-  initialFilters,
+  availableCategories,
   searchParams 
 }: ProductGridProps) {
   const router = useRouter();
@@ -44,6 +41,23 @@ export default function ProductGrid({
     search: typeof searchParams.search === 'string' ? searchParams.search : '',
   });
   const [loading, setLoading] = useState(false);
+
+  // Sync filters with URL on initial load
+  useEffect(() => {
+    const category = params.get('category');
+    const sort = params.get('sort');
+    const minPrice = params.get('minPrice');
+    const maxPrice = params.get('maxPrice');
+    const search = params.get('search');
+
+    setFilters({
+      category: category || 'all',
+      sort: sort || 'featured',
+      minPrice: minPrice || '',
+      maxPrice: maxPrice || '',
+      search: search || '',
+    });
+  }, [params]);
 
   // Update URL when filters change
   const updateURL = (newFilters: typeof filters, page: number = 1) => {
@@ -102,35 +116,47 @@ export default function ProductGrid({
     updateURL(filters, page);
   };
 
+  // Get current category name for display
+  const currentCategoryName = useMemo(() => {
+    if (filters.category === 'all') return 'All Products';
+    const category = availableCategories.find(cat => cat.slug === filters.category);
+    return category ? category.name : 'All Products';
+  }, [filters.category, availableCategories]);
+
   return (
     <div className="flex flex-col lg:flex-row gap-8">
       <ProductFilters 
         filters={filters} 
         onFilterChange={handleFilterChange}
-        availableFilters={initialFilters}
+        availableCategories={availableCategories}
       />
       
       <div className="flex-1">
-        {/* Results Count */}
-        <div className="flex justify-between items-center mb-6">
-          <p className="text-sm text-muted-foreground">
-            Showing {((pagination.currentPage - 1) * pagination.limit) + 1} -{' '}
-            {Math.min(pagination.currentPage * pagination.limit, pagination.totalProducts)} of{' '}
-            {pagination.totalProducts} products
-          </p>
-          
-          {/* Sort Dropdown */}
-          <select
-            value={filters.sort}
-            onChange={(e) => handleFilterChange({ sort: e.target.value })}
-            className="px-3 py-2 border border-gray-300 rounded-md text-sm"
-          >
-            <option value="featured">Featured</option>
-            <option value="newest">Newest</option>
-            <option value="price-asc">Price: Low to High</option>
-            <option value="price-desc">Price: High to Low</option>
-            <option value="popular">Most Popular</option>
-          </select>
+        {/* Results Header */}
+        <div className="mb-6">
+          <h2 className="text-2xl font-bold text-gray-900 mb-2">
+            {currentCategoryName}
+          </h2>
+          <div className="flex justify-between items-center">
+            <p className="text-sm text-muted-foreground">
+              Showing {((pagination.currentPage - 1) * pagination.limit) + 1} -{' '}
+              {Math.min(pagination.currentPage * pagination.limit, pagination.totalProducts)} of{' '}
+              {pagination.totalProducts} products
+            </p>
+            
+            {/* Sort Dropdown */}
+            <select
+              value={filters.sort}
+              onChange={(e) => handleFilterChange({ sort: e.target.value })}
+              className="px-3 py-2 border border-gray-300 rounded-md text-sm"
+            >
+              <option value="featured">Featured</option>
+              <option value="newest">Newest</option>
+              <option value="price-asc">Price: Low to High</option>
+              <option value="price-desc">Price: High to Low</option>
+              <option value="popular">Most Popular</option>
+            </select>
+          </div>
         </div>
 
         {loading ? (
@@ -173,7 +199,9 @@ export default function ProductGrid({
         ) : (
           <div className="flex flex-col items-center justify-center h-96 text-center bg-card rounded-lg">
             <h3 className="text-2xl font-semibold">No products found</h3>
-            <p className="mt-2 text-muted-foreground">Try adjusting your filters.</p>
+            <p className="mt-2 text-muted-foreground">
+              {filters.category !== 'all' ? `No products found in ${currentCategoryName}. Try another category.` : 'Try adjusting your filters.'}
+            </p>
           </div>
         )}
       </div>

@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
 
     const body: CheckoutRequest = await req.json();
     
-    const { customer, shippingAddress, items, totalAmount } = body;
+    const { customer, shippingAddress, items, totalAmount, shippingFee } = body;
 
     // Validate required fields
     if (!customer?.email || !customer?.firstName || !customer?.lastName || !customer?.phone) {
@@ -105,7 +105,7 @@ export async function POST(req: NextRequest) {
       shippingAddress,
       items: orderItems,
       subtotal,
-      shippingFee: 0, // Free shipping for Nigeria
+      shippingFee: shippingFee, // Free shipping for Nigeria
       taxAmount: 0, // No tax for now
       totalAmount,
       orderNumber,

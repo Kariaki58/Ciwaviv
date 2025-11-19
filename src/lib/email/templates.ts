@@ -198,7 +198,7 @@ export function buyerOrderTrackingEmail(order: any) {
                 </p>`
             }
 
-            <a href="${process.env.NEXT_PUBLIC_API_URL}/track?orderId=${order.orderNumber}" style="${button}">
+            <a href="${process.env.NEXT_PUBLIC_API_URL}/track-order?orderId=${order.orderNumber}" style="${button}">
               Track My Order
             </a>
           </div>

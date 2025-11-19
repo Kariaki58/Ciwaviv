@@ -36,12 +36,29 @@ async function getShopProducts(page: number = 1, filters: any = {}) {
   }
 }
 
+async function getCategories() {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/categories`, {
+      next: { revalidate: 3600 }
+    });
+    
+    if (!response.ok) {
+      throw new Error('Failed to fetch categories');
+    }
+    
+    const data = await response.json();
+    return data.categories || [];
+  } catch (error) {
+    console.error('Error fetching categories:', error);
+    return [];
+  }
+}
+
 export default async function ShopPage({
   searchParams,
 }: {
   searchParams: Promise<Record<string, string>>;
 }) {
-  // ✅ Await the promise
   const params = await searchParams;
 
   const page = params.page ? parseInt(params.page) : 1;
@@ -58,7 +75,11 @@ export default async function ShopPage({
   if (maxPrice) filters.maxPrice = maxPrice;
   if (search) filters.search = search;
 
-  const data = await getShopProducts(page, filters);
+  // Fetch products and categories in parallel
+  const [data, categories] = await Promise.all([
+    getShopProducts(page, filters),
+    getCategories()
+  ]);
 
   return (
     <div className="container mx-auto px-4 py-12 md:py-16">
@@ -74,7 +95,7 @@ export default async function ShopPage({
       <ProductGrid
         initialProducts={data.products}
         initialPagination={data.pagination}
-        initialFilters={data.filters}
+        availableCategories={categories}
         searchParams={params}
       />
     </div>
