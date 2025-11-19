@@ -66,15 +66,15 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-gray-100 shadow-2xl shadow-slate-900/40 text-card-foreground">
+    <footer className="bg-gray-700 shadow-2xl shadow-slate-900/40 text-card-foreground">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand and Newsletter */}
           <div className="md:col-span-2">
-            <div className="mb-6">
+            {/* <div className="mb-6">
               <Logo />
-            </div>
-            <p className="text-muted-foreground mb-4 max-w-sm">
+            </div> */}
+            <p className="text-white mb-4 max-w-sm">
               Sign up for our newsletter to get the latest news, drops, and deals from our Nigerian brand.
             </p>
             <form onSubmit={handleNewsletterSubmit} className="flex gap-2 max-w-sm">
@@ -98,29 +98,29 @@ export default function Footer() {
 
           {/* Links */}
           <div>
-            <h3 className="font-headline font-semibold mb-4">Shop</h3>
+            <h3 className="font-headline text-white font-semibold mb-4">Shop</h3>
             <ul className="space-y-2">
-              <li><Link href="/shop" className="text-muted-foreground hover:text-primary">All Products</Link></li>
-              <li><Link href="/shop?category=men" className="text-muted-foreground hover:text-primary">Men's</Link></li>
-              <li><Link href="/shop?category=women" className="text-muted-foreground hover:text-primary">Women's</Link></li>
-              <li><Link href="/shop?sort=newest" className="text-muted-foreground hover:text-primary">New Arrivals</Link></li>
+              <li><Link href="/shop" className="text-white hover:text-primary">All Products</Link></li>
+              <li><Link href="/shop?category=men" className="text-white hover:text-primary">Men's</Link></li>
+              <li><Link href="/shop?category=women" className="text-white hover:text-primary">Women's</Link></li>
+              <li><Link href="/shop?sort=newest" className="text-white hover:text-primary">New Arrivals</Link></li>
             </ul>
           </div>
 
           <div>
-            <h3 className="font-headline font-semibold mb-4">About</h3>
+            <h3 className="font-headline text-white font-semibold mb-4">About</h3>
             <ul className="space-y-2">
-              <li><Link href="/about" className="text-muted-foreground hover:text-primary">Our Story</Link></li>
-              <li><Link href="/contact" className="text-muted-foreground hover:text-primary">Contact Us</Link></li>
-              <li><Link href="/track-order" className="text-muted-foreground hover:text-primary">Track Order</Link></li>
-              <li><Link href="#" className="text-muted-foreground hover:text-primary">FAQs</Link></li>
+              <li><Link href="/about" className="text-white hover:text-primary">Our Story</Link></li>
+              <li><Link href="/contact" className="text-white hover:text-primary">Contact Us</Link></li>
+              <li><Link href="/track-order" className="text-white hover:text-primary">Track Order</Link></li>
+              <li><Link href="#" className="text-white hover:text-primary">FAQs</Link></li>
             </ul>
           </div>
         </div>
 
         {/* Bottom Bar */}
         <div>
-          <h4 className="font-bold mb-3 sm:mb-4 text-sm sm:text-base mt-5">Follow Us</h4>
+          <h4 className="font-bold text-white mb-3 sm:mb-4 text-sm sm:text-base mt-5">Follow Us</h4>
           <div className="flex space-x-3 sm:space-x-4">
             {/* Facebook */}
             <a
