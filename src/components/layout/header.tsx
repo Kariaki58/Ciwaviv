@@ -14,7 +14,7 @@ const navLinks = [
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
   { href: '/track-order', label: 'Track Order' },
-  { href: '/admindashboard', label: 'admin' }
+  // { href: '/admindashboard', label: 'admin' }
 ];
 
 export default function Header() {
