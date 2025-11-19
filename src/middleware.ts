@@ -7,7 +7,6 @@ const secret = process.env.NEXTAUTH_SECRET;
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
-  console.log({ pathname })
   // Only protect /admin routes
   if (!pathname.startsWith("/admindashboard")) {
     return NextResponse.next();
@@ -24,7 +23,6 @@ export async function middleware(req: NextRequest) {
         : "next-auth.session-token",
   });
 
-  console.log({ token })
 
   // Not logged in → redirect to login page
   if (!token) {

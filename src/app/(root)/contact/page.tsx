@@ -16,9 +16,8 @@ import {
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { Instagram, Twitter, MessageCircle } from 'lucide-react';
+import { Instagram, Twitter, MessageCircle, Linkedin } from 'lucide-react';
 import Link from 'next/link';
-import type { Metadata } from 'next';
 
 const formSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters.'),
@@ -37,13 +36,21 @@ export default function ContactPage() {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(values),
+    });
+
     toast({
-      title: 'Message Sent!',
+      title: "Message Sent!",
       description: "Thanks for reaching out. We'll get back to you soon.",
     });
+
     form.reset();
   }
+
 
   return (
     <div className="container mx-auto px-4 py-16 md:py-24">
@@ -112,16 +119,16 @@ export default function ContactPage() {
                 Follow our journey and stay up-to-date with the latest drops and news.
               </p>
               <div className="space-y-4">
-                <Link href="#" className="flex items-center group">
+                <Link target='_blank' href="https://instagram.com/fithubbyciwaviv" className="flex items-center group">
                   <Instagram className="h-6 w-6 mr-3 text-muted-foreground group-hover:text-primary" />
                   <span className="group-hover:text-primary">@Fithub_active</span>
                 </Link>
-                <Link href="#" className="flex items-center group">
+                <Link target='_blank' href="https://x.com/fithubbyciwaviv" className="flex items-center group">
                   <Twitter className="h-6 w-6 mr-3 text-muted-foreground group-hover:text-primary" />
                   <span className="group-hover:text-primary">@Fithub</span>
                 </Link>
-                <Link href="#" className="flex items-center group">
-                  <MessageCircle className="h-6 w-6 mr-3 text-muted-foreground group-hover:text-primary" />
+                <Link target='_blank' href="https://www.linkedin.com/company/ciwavivltd" className="flex items-center group">
+                  <Linkedin className="h-6 w-6 mr-3 text-muted-foreground group-hover:text-primary" />
                   <span className="group-hover:text-primary">TikTok</span>
                 </Link>
               </div>

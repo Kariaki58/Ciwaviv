@@ -17,7 +17,6 @@ export async function GET(req: NextRequest) {
     const search = searchParams.get('search') || '';
 
 
-    console.log({ category })
 
     const skip = (page - 1) * limit;
 
@@ -31,7 +30,6 @@ export async function GET(req: NextRequest) {
         slug: { $regex: new RegExp(`^${category}$`, 'i') } 
       });
 
-      console.log({ categoryDoc })
       
       if (categoryDoc) {
         filter.category = categoryDoc._id;

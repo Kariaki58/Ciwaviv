@@ -1,7 +1,7 @@
 import { resend } from "../resend";
 
 import { adminNewOrderEmail, customerEstimatedDeliveryEmail, customerOrderShippedEmail, customerOrderDeliveredEmail,
-    customerOtpEmail, buyerOrderTrackingEmail, customerPaymentConfirmedEmail
+    customerOtpEmail, buyerOrderTrackingEmail, customerPaymentConfirmedEmail, adminContactFormEmail
 } from "./templates";
 
 // Send email to admin when new order is placed
@@ -85,5 +85,17 @@ export async function sendLostOrderOtpEmail(
     from: "Ciwaviv <support@ciwaviv.com>",
     to: customerEmail,
     ...customerOtpEmail(customerName, otpCode),
+  });
+}
+
+export async function sendContactFormEmail(data: {
+  name: string;
+  email: string;
+  message: string;
+}) {
+  return resend.emails.send({
+    from: "Ciwaviv <support@ciwaviv.com>",
+    to: "support@ciwaviv.com",
+    ...adminContactFormEmail(data),
   });
 }

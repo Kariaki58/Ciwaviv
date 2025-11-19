@@ -409,3 +409,27 @@ export function customerOtpEmail(name: string, otp: string) {
     `,
   };
 }
+
+export function adminContactFormEmail(data: {
+  name: string;
+  email: string;
+  message: string;
+}) {
+  return {
+    subject: `📩 New Contact Form Message from ${data.name}`,
+    html: `
+      <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px;">
+        <h2 style="color: #111827;">New Contact Form Submission</h2>
+
+        <p><strong>Name:</strong> ${data.name}</p>
+        <p><strong>Email:</strong> ${data.email}</p>
+
+        <h3 style="margin-top: 20px;">Message</h3>
+        <p style="white-space: pre-wrap;">${data.message}</p>
+
+        <hr style="margin: 30px 0;" />
+        <p style="color: #6b7280; font-size: 14px;">Ciwaviv Contact Form Notification</p>
+      </div>
+    `
+  };
+}

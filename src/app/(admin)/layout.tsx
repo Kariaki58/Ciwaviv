@@ -8,19 +8,6 @@ import {
 import '../globals.css'
 import SessionContext from '@/components/ReactSessioncontext';
 
-import { cn } from '@/lib/utils';
-
-const fontBody = Inter({
-  subsets: ['latin'],
-  variable: '--font-body',
-});
-
-const fontHeadline = Poppins({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-headline',
-});
-import Sidebar from "@/components/sidebar";
 
 export default function DashboardLayout({ children }: { children: React.ReactNode  }) {
     return (

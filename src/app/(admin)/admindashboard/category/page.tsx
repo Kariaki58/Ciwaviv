@@ -80,27 +80,20 @@ export default function CategoryDashboardPage() {
   }, [formData.name, editingCategory]);
 
   const handleImageUpload = async (file: File) => {
-    console.log("File selected:", file.name, file.type, file.size);
     
     setIsUploading(true);
     try {
       const formData = new FormData();
       formData.append("files", file);
 
-      console.log("FormData entries:");
-      for (const entry of formData.entries()) {
-        console.log(entry);
-      }
 
       const response = await fetch("/api/upload-image", {
         method: "POST",
         body: formData,
       });
 
-      console.log("Response status:", response.status);
       
       const result = await response.json();
-      console.log("API response:", result);
 
       if (result.success && result.urls && result.urls.length > 0) {
         setFormData(prev => ({ ...prev, categoryImage: result.urls[0] }));

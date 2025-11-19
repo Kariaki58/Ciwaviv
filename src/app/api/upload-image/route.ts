@@ -14,7 +14,6 @@ export async function POST(req: NextRequest) {
         }
         const userId = session?.user?.id;
 
-        console.log({ userId })
 
         if (!userId) {
             return NextResponse.json({ error: "Invalid User" }, { status: 401 });
@@ -35,7 +34,6 @@ export async function POST(req: NextRequest) {
         const files = formData.getAll("files").filter((entry): entry is File => entry instanceof File);
 
         if (!files || files.length === 0) {
-            console.log({ files })
             return NextResponse.json({ error: "No files uploaded" }, { status: 400 });
         }
 

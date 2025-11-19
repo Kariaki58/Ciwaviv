@@ -11,7 +11,6 @@ export async function GET() {
     
     const categories = await Category.find({}).sort({ createdAt: -1 });
     
-    console.log('Fetched categories:', categories);
     return NextResponse.json({ 
       success: true,
 

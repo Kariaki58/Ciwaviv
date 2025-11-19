@@ -149,7 +149,7 @@ export default async function Home() {
                     <div className="absolute bottom-0 p-6 text-white">
                       <h3 className="text-xl font-bold">{cat.name}</h3>
                       <p className="text-sm text-gray-200 mb-3">{cat.description}</p>
-                      <span className="text-sm bg-primary px-3 py-1 rounded-full">Shop Now</span>
+                      <span className="text-sm bg-primary px-3 py-1 text-black rounded-full">Shop Now</span>
                     </div>
                   </div>
                 </Link>
