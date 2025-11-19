@@ -134,7 +134,7 @@ export default async function Home() {
             </h1>
 
             <p className="text-lg md:text-xl font-semibold text-cyan-100 mt-2 mb-6 drop-shadow-md">
-              Premium sportswear, gym essentials, and physiotherapy gear — everything you need to train smarter and recover faster.
+              Premium sportswear, gym essentials, and equipment — everything you need to train smarter and recover faster.
             </p>
 
             <Button
