@@ -72,9 +72,7 @@ export default function Footer() {
           {/* Brand and Newsletter */}
           <div className="md:col-span-2">
             <div className="mb-6">
-              <Link href="/" aria-label="Back to homepage">
-                <Logo />
-              </Link>
+              <Logo />
             </div>
             <p className="text-muted-foreground mb-4 max-w-sm">
               Sign up for our newsletter to get the latest news, drops, and deals from our Nigerian brand.

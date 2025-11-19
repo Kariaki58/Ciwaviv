@@ -18,9 +18,7 @@ export default function MobileNav({ navLinks }: MobileNavProps) {
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetContent side="left">
         <div className="p-4">
-          <Link href="/" className="mb-8 block" onClick={() => setIsOpen(false)}>
-            <Logo />
-          </Link>
+          <Logo />
           <nav className="flex flex-col gap-6">
             {navLinks.map((link) => (
               <Link

@@ -25,9 +25,7 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center px-4">
         <div className="mr-8 hidden md:flex">
-          <Link href="/" aria-label="Back to homepage">
-            <Logo />
-          </Link>
+          <Logo />
         </div>
         
         <div className="flex items-center md:hidden">
@@ -36,9 +34,7 @@ export default function Header() {
         
         <div className="flex flex-1 items-center justify-between md:justify-start">
             <div className="md:hidden">
-              <Link href="/" aria-label="Back to homepage">
-                <Logo />
-              </Link>
+              <Logo />
             </div>
             <nav className="hidden md:flex md:gap-6">
               {navLinks.map((link) => (
