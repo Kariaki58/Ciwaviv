@@ -163,6 +163,11 @@ export default function Footer() {
             </a>
           </div>
         </div>
+        <div className="text-center mt-2 mb-0">
+          <p className="text-white text-md">
+            Designed by  <Link href="http://vxdigitals.com/" target="_blank" className="text-primary">VxDigital</Link>.
+          </p>
+        </div>
       </div>
     </footer>
   );
