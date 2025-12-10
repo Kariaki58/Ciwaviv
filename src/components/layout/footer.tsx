@@ -101,8 +101,6 @@ export default function Footer() {
             <h3 className="font-headline text-white font-semibold mb-4">Shop</h3>
             <ul className="space-y-2">
               <li><Link href="/shop" className="text-white hover:text-primary">All Products</Link></li>
-              <li><Link href="/shop?category=men" className="text-white hover:text-primary">Men's</Link></li>
-              <li><Link href="/shop?category=women" className="text-white hover:text-primary">Women's</Link></li>
               <li><Link href="/shop?sort=newest" className="text-white hover:text-primary">New Arrivals</Link></li>
             </ul>
           </div>
@@ -165,7 +163,7 @@ export default function Footer() {
         </div>
         <div className="text-center mt-2 mb-0">
           <p className="text-white text-md">
-            Designed by  <Link href="http://vxdigitals.com/" target="_blank" className="text-primary">VxDigital</Link>.
+            All right reserved | Designed by <Link href="http://vxdigitals.com/" target="_blank" className="text-primary">VxDigital Ltd</Link>.
           </p>
         </div>
       </div>
